@@ -3,6 +3,8 @@ package webframe.VO;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class responseJsonHeaderVO {
 	private String COUNT;
 	private String ERROR_FLAG;
@@ -28,6 +30,8 @@ public class responseJsonHeaderVO {
 		MAX_FLAG = "";
 		
 	}
+
+	@JsonProperty("COUNT")
 	public String getCOUNT() {
 		return COUNT;
 	}

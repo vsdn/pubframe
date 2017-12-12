@@ -62,10 +62,9 @@ public class svcHost {
 		resVO.HEADER.setRES_TIME("2017-12-12 17:05:59");
 		resVO.HEADER.setMAX_FLAG("MAX_F");
 		
-		JSONObject jsonObject = new JSONObject();  
 		
 		//RESPONSE VO => JSON
-		ret = jsonObject.toJSONString(); 
+		ret = objUtil.getResJson(resVO); 
 
 		
 		return ret;

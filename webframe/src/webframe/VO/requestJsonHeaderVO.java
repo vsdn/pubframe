@@ -3,6 +3,8 @@ package webframe.VO;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class requestJsonHeaderVO {
 	private String SERVICE;
 	private String METHOD;
@@ -38,12 +40,14 @@ public class requestJsonHeaderVO {
 	
 	}
 	
+	@JsonProperty("SERVICE")
 	public String getSERVICE() {
 		return SERVICE;
 	}
 	public void setSERVICE(String sERVICE) {
 		SERVICE = sERVICE;
 	}
+	@JsonProperty("METHOD")
 	public String getMETHOD() {
 		return METHOD;
 	}
