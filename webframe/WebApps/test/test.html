@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <title>테스트</title>
+  <!--  <link rel="stylesheet" href="/html/test/main.css"> -->
+    
+	
+    <script src="../js/common/jquery-1.12.4.min.js"></script>
+    <script src="../js/common/frame.common.js"></script>
+    <script src="../js/common/frame.reqJson.js"></script>
+    
+    <!-- 화면 기능에 따라 기능별 공통스크립트를 링크한다. -->
+
+    <!-- 프로젝트에 맞게 공통 스크립트를 확장하여 링크한다. -->
+    <!-- 프로젝트에 맞게 공통 스크립트를 확장하여 링크한다. -->
+
+<script type="text/javascript">
+function callSvc() {
+	var objReqJson = new reqJson();
+	
+	objReqJson.createBaseGroup();
+	objReqJson.setSERVICE("SVC001");
+	objReqJson.setMETHOD("SelData");
+	objReqJson.setMENU_ID("test");
+	objReqJson.setASYNC("TRUE");
+	objReqJson.setPROGRESS_BAR("TRUE");
+	objReqJson.setTYPE("SELECT");
+	objReqJson.setURL(document.location.href);
+	objReqJson.setCLIENT_TYPE(cmnFrame.getClientType());
+	objReqJson.setCLIENT_META(clientInformation.userAgent);
+	objReqJson.setCONTROL_TYPE("NONE");
+	objReqJson.setCONTROL_ID("");
+	objReqJson.setPAGES_CNT("1");
+	objReqJson.setROW_CNT("100");
+	objReqJson.setMAX_LIMIT("3000");
+	cmnFrame.callService(objReqJson);
+
+}
+
+</script>
+</head>
+<body>
+<span onclick="callSvc();">호출</span>
+</body>
+</html>
