@@ -40,14 +40,12 @@ public class requestJsonHeaderVO {
 	
 	}
 	
-	@JsonProperty("SERVICE")
 	public String getSERVICE() {
 		return SERVICE;
 	}
 	public void setSERVICE(String sERVICE) {
 		SERVICE = sERVICE;
 	}
-	@JsonProperty("METHOD")
 	public String getMETHOD() {
 		return METHOD;
 	}

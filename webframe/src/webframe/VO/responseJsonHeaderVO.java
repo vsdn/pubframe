@@ -31,7 +31,7 @@ public class responseJsonHeaderVO {
 		
 	}
 
-	@JsonProperty("COUNT")
+
 	public String getCOUNT() {
 		return COUNT;
 	}

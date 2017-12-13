@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonParser;
 
 import webframe.VO.requestJsonVO;
 import webframe.VO.responseJsonVO;
+import webframe.common.cmnLog;
 import webframe.common.cmnSvcUtil;
 
 import java.util.Enumeration;
@@ -19,6 +20,7 @@ import javax.servlet.ServletContext;
 public class svcHost {
 
 	public String serviceHandler(HttpServletRequest req, HttpServletResponse res, HttpSession sess) {
+		
 		String ret = "";
 		ServletContext context = req.getServletContext();
 
@@ -26,7 +28,7 @@ public class svcHost {
 		//REQUEST VO SET
 		requestJsonVO reqVO = objUtil.getReqVO(req);
 		
-		System.out.println(reqVO.HEADER.getSERVICE());
+		cmnLog.Debug(reqVO.HEADER.getSERVICE());
 		/*
 		requestJsonVO reqVO = new requestJsonVO();
 		Enumeration enu = req.getParameterNames();
@@ -34,7 +36,7 @@ public class svcHost {
 
 		 while (enu.hasMoreElements()) {
 		  strName= (String) enu.nextElement();
-		  System.out.println(strName + ":" + req.getParameter(strName));
+		  cmnLog.Debug(strName + ":" + req.getParameter(strName));
 		 }*/
 
 		
