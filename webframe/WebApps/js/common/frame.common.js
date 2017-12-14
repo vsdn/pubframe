@@ -2,7 +2,7 @@ var cmnFrame = {
 		getClientType : function() {
 			return clientInformation.userAgent;
 		},
-		callService : function(obj) {
+		callService : function(obj, successFunc, errorFunc) {
 		 $.ajax({      
 		        type:"POST",  
 		        dataType : 'json',
@@ -10,10 +10,12 @@ var cmnFrame = {
 		        data:obj.jsonData,      
 		        success:function(data){   
 		            alert(data);
+		            successFunc(data);
 		        	
 		        },   
 		        error:function(e){  
 		            alert(e.responseText);  
+		            errorFunc(e.responseText);
 		        }  
 		    });  
 		}		

@@ -36,7 +36,7 @@ function callSvc() {
 	objReqJson.setPAGES_CNT("1");
 	objReqJson.setROW_CNT("100");
 	objReqJson.setMAX_LIMIT("3000");
-	cmnFrame.callService(objReqJson);
+	cmnFrame.callService(objReqJson, function(data){alert(data.DATA.length);}, function(retTxt) {alert(retTxt);});
 
 }
 
@@ -44,5 +44,6 @@ function callSvc() {
 </head>
 <body>
 <span onclick="callSvc();">호출</span>
+<div id="testZone"></div>
 </body>
 </html>

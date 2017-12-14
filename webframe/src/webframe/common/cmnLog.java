@@ -5,16 +5,16 @@ import org.apache.logging.log4j.Logger;
 public class cmnLog {
 	private static final Logger logger = LogManager.getLogger("webframe");
 	public static void Info(String val) {
-		System.out.println(val);
+		logger.info(val);
 	}
 	public static void Debug(String val) {
-		System.out.println(val);
+		logger.debug(val);
 	}
 	public static void Error(String val) {
-		System.out.println(val);
+		logger.error(val);
 	}
 	public static void Error(Exception e) {
 		//Logger.getLogger("com.n.els").error(val);
-		System.out.println(e.toString());
+		logger.error(e.toString());
 	}
 }

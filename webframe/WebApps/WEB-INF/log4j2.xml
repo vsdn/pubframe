@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<properties>
+		<property name="log-path">${myapp.root}/WEB-INF/log/</property>
+	</properties>
+
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36}::%M - %msg%n" />
+		</Console>
+
+		<RollingFile name="file" fileName="${log-path}/webapp.log" filePattern="${log-path}/webapp_%d{yyyy-MM-dd}.log" append="true">
+			<PatternLayout pattern="%d %5p [%c::%M] %m%n" />
+			<Policies>
+				<!-- interval(default 1)이므로 1초 간격으로 rolling 수행 interval속성 추가 -->
+				<TimeBasedTriggeringPolicy interval="24" />
+				<!-- 사이즈 제한을 하고 싶을 경우 아래 속성 추가 -->
+				<!-- <SizeBasedTriggeringPolicy size="250 MB"/> -->
+			</Policies>
+		</RollingFile>
+	</appenders>
+	<Loggers>
+
+		<!-- logger의 name에는 class 속성이 들어간다. 문제는 현재 프로젝트는 src밑에 개별로 package를 쪼개놔서 
+			이를 설정하기가 애매해보인다. 그냥 각각 logger 설정-_-; additivity => 로그 중복여부, ROOT와 중복될 경우 
+			한곳에서만 출력 -->
+		<Logger name="webframe" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="file" />
+		</Logger>
+
+		<!-- console 에 출력하는건 ROOT를 사용하게 함 -->
+		<Root level="DEBUG">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="file" />
+		</Root>
+
+	</Loggers>
+</configuration>
