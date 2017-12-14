@@ -16,7 +16,7 @@
     <script src="../js/common/jquery-1.12.4.min.js"></script>
     <script src="../js/common/frame.common.js"></script>
     <script src="../js/common/frame.reqJson.js"></script>
-
+	<script src="../js/common/jquery.cookie.js"></script>
     <script src="../js/main/login.js"></script>
   </head>
 
@@ -30,10 +30,11 @@
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> ID 저장
+            <input id="EmailSaveChk" type="checkbox" value="remember-me"> Email 저장
+            
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit_button">로그인</button>
       </form>
 
     </div> <!-- /container -->
