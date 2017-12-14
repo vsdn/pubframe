@@ -9,7 +9,7 @@ var cmnFrame = {
 		        url:"/webframe/api/svc.jsp",      
 		        data:obj.jsonData,      
 		        success:function(data){   
-		            alert(data);
+		         //   alert(data);
 		            successFunc(data);
 		        	
 		        },   

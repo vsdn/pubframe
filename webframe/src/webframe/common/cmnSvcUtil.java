@@ -38,8 +38,6 @@ public class cmnSvcUtil {
 		
 		 HashMap<String, String> hDataMap = new HashMap();
 		
-		Gson gson = new Gson();
-		
 		Enumeration enu = req.getParameterNames();
 
 		 int i = 0;
@@ -57,7 +55,7 @@ public class cmnSvcUtil {
 				idx = strName.substring(_indexFirst+1,_index);
 				Key = strName.substring(_index+2,strName.length()-1);
 				Val = cmnUtil.getParam(req, strName);
-				cmnLog.Debug(idx + "|" + Key + "|" + Val);
+				//cmnLog.Debug(idx + "|" + Key + "|" + Val);
 		         setData(objVO, Integer.parseInt(idx), Key, Val);
 
 				//hDataMap.setString(strName.substring(_index+2,strName.length()-1), Integer.parseInt(strName.substring(_indexFirst+1,_index)), objRequest.getParameterValues(strName)[i], strName.substring(0, _indexFirst));
@@ -70,13 +68,13 @@ public class cmnSvcUtil {
 		     Iterator<String> iterator = map.keySet().iterator();
 		     while (iterator.hasNext()) {
 		         String key = (String) iterator.next();
-		         cmnLog.Debug("key="+key + ":" + " value="+map.get(key));
+		        // cmnLog.Debug("key="+key + ":" + " value="+map.get(key));
 		     }
 		 }
 	     Iterator<String> iterator = hDataMap.keySet().iterator();
 	     while (iterator.hasNext()) {
 	         String key = (String) iterator.next();
-	         cmnLog.Debug("key="+key + ":" + " value="+hDataMap.get(key));
+	         //cmnLog.Debug("key="+key + ":" + " value="+hDataMap.get(key));
 	     }
 
 		return objVO;

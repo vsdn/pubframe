@@ -36,7 +36,10 @@ function callSvc() {
 	objReqJson.setPAGES_CNT("1");
 	objReqJson.setROW_CNT("100");
 	objReqJson.setMAX_LIMIT("3000");
-	cmnFrame.callService(objReqJson, function(data){alert(data.DATA.length);}, function(retTxt) {alert(retTxt);});
+	cmnFrame.callService(objReqJson, function(data){alert(data.DATA[0].NAME);
+													$("#testZone").html(data.DATA[0].NAME + ":" + data.DATA[0].AGE);
+													}, function(retTxt) {alert(retTxt);});
+
 
 }
 

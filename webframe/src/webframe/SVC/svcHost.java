@@ -10,10 +10,12 @@ import com.fasterxml.jackson.core.JsonParser;
 
 import webframe.VO.requestJsonVO;
 import webframe.VO.responseJsonVO;
+import webframe.VO.testVO;
 import webframe.common.cmnLog;
 import webframe.common.cmnSvcUtil;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 
@@ -23,36 +25,22 @@ public class svcHost {
 		
 		String ret = "";
 		ServletContext context = req.getServletContext();
-
+		
 		cmnSvcUtil objUtil = new cmnSvcUtil();
 		//REQUEST VO SET
 		requestJsonVO reqVO = objUtil.getReqVO(req);
 		
-		cmnLog.Debug(reqVO.HEADER.getSERVICE());
-		/*
-		requestJsonVO reqVO = new requestJsonVO();
-		Enumeration enu = req.getParameterNames();
-		 String strName;
 
-		 while (enu.hasMoreElements()) {
-		  strName= (String) enu.nextElement();
-		  cmnLog.Debug(strName + ":" + req.getParameter(strName));
-		 }*/
-
+		svcTest svcTest = new svcTest();
 		
-		
-		//SESSION VO SET
-
-		
+		//SESSION VO SET	
 		//IAM CHECK
-		
-		
 		//SVC PROCESS CALL
-		
-		
 		//RESPONSE VO SET
-		responseJsonVO resVO = new responseJsonVO();
+		responseJsonVO resVO = null;
 		
+		resVO = svcTest.getDbcpResult(reqVO);
+		/*
 		resVO.HEADER.setCOUNT("11");
 		resVO.HEADER.setERROR_FLAG("NORMAL");
 		resVO.HEADER.setMSG_CODE("MSG_CODE");
@@ -65,6 +53,13 @@ public class svcHost {
 		resVO.HEADER.setMAX_FLAG("MAX_F");
 		
 		
+		testVO tVO = new testVO();
+		
+		tVO.setNAME("°í´ë¼®");
+		tVO.setAGE("21");
+
+		resVO.DATA.add(tVO);
+		*/
 		//RESPONSE VO => JSON
 		ret = objUtil.getResJson(resVO); 
 
