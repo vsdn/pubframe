@@ -11,35 +11,41 @@ import com.fasterxml.jackson.core.JsonParser;
 import webframe.VO.requestJsonVO;
 import webframe.VO.responseJsonVO;
 import webframe.VO.testVO;
+import webframe.VO.usrVO;
+import webframe.common.cmnDbCon;
 import webframe.common.cmnLog;
 import webframe.common.cmnSvcUtil;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.ServletContext;
 
 public class svcHost {
 
 	public String serviceHandler(HttpServletRequest req, HttpServletResponse res, HttpSession sess) {
-		
 		String ret = "";
 		ServletContext context = req.getServletContext();
-		
 		cmnSvcUtil objUtil = new cmnSvcUtil();
 		//REQUEST VO SET
 		requestJsonVO reqVO = objUtil.getReqVO(req);
-		
+		responseJsonVO resVO = null;
 
+		//cmnLog.Debug(reqVO.HEADER.getTYPE());
+		if("InsertUser".equals(reqVO.HEADER.getMETHOD()))
+		{
+			resVO = InsertUser(reqVO);
+		}
+			
 		svcTest svcTest = new svcTest();
 		
 		//SESSION VO SET	
 		//IAM CHECK
 		//SVC PROCESS CALL
 		//RESPONSE VO SET
-		responseJsonVO resVO = null;
 		
-		resVO = svcTest.getDbcpResult(reqVO);
+		//resVO = svcTest.getDbcpResult(reqVO);
 		/*
 		resVO.HEADER.setCOUNT("11");
 		resVO.HEADER.setERROR_FLAG("NORMAL");
@@ -65,5 +71,36 @@ public class svcHost {
 
 		
 		return ret;
+	}
+	private responseJsonVO InsertUser(requestJsonVO reqVO) {
+	
+		responseJsonVO resVO = new responseJsonVO();	
+		cmnDbCon objDbCon = new cmnDbCon();
+		usrVO	usrVO = new usrVO();
+		
+		
+		String sQuery1 = "",sQuery2 = "";
+	
+
+		/* for(int i = 0; i < reqVO.DATA.size();i++)  {
+			 HashMap map = (HashMap)reqVO.DATA.get(i);
+		     Iterator<String> iterator = map.keySet().iterator();
+		     while (iterator.hasNext()) {
+		         String key = (String) iterator.next();
+		        
+		     }
+		 }*/
+		 
+		sQuery1 = "INSERT INTO NAEDU.dbo.TFRWUSR0101M  (	USID, PASSWORD, USNAME, LIFYEA, USE_F,DEPT_CODE, GRADE, SYS_FRST_DATE ) VALUES ";
+		sQuery2 = ("(?, ?, ?, ?, ?, ?,?, GETDATE())");
+		sQuery1 += sQuery2;
+		
+		cmnLog.Debug(sQuery1);
+		resVO = objDbCon.getDbcpResult(reqVO, sQuery1);
+		
+		
+		
+		
+		return resVO;
 	}
 }

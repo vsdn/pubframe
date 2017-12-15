@@ -7,10 +7,15 @@
     <title>테스트</title>
   <!--  <link rel="stylesheet" href="/html/test/main.css"> -->
     
-	
+	<link href="../css/common/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/common/bootstrap-grid.min.css" rel="stylesheet">
+	<link href="../css/common/bootstrap-reboot.min.css" rel="stylesheet">
+
     <script src="../js/common/jquery-1.12.4.min.js"></script>
     <script src="../js/common/frame.common.js"></script>
     <script src="../js/common/frame.reqJson.js"></script>
+    <script src="../js/common/bootstrap.min.js"></script>
+    <script src="../js/common/bootstrap.bundle.min.js"></script>
     
     <!-- 화면 기능에 따라 기능별 공통스크립트를 링크한다. -->
 
@@ -22,12 +27,12 @@ function callSvc() {
 	var objReqJson = new reqJson();
 	
 	objReqJson.createBaseGroup();
-	objReqJson.setSERVICE("SVC001");
-	objReqJson.setMETHOD("SelData");
+	objReqJson.setSERVICE("TFRWUSR0101M");
+	objReqJson.setMETHOD("InsertUser");
 	objReqJson.setMENU_ID("test");
 	objReqJson.setASYNC("TRUE");
 	objReqJson.setPROGRESS_BAR("TRUE");
-	objReqJson.setTYPE("SELECT");
+	objReqJson.setTYPE("INSERT");
 	objReqJson.setURL(document.location.href);
 	objReqJson.setCLIENT_TYPE(cmnFrame.getClientType());
 	objReqJson.setCLIENT_META(clientInformation.userAgent);
@@ -36,17 +41,63 @@ function callSvc() {
 	objReqJson.setPAGES_CNT("1");
 	objReqJson.setROW_CNT("100");
 	objReqJson.setMAX_LIMIT("3000");
-	cmnFrame.callService(objReqJson, function(data){alert(data.DATA[0].NAME);
-													$("#testZone").html(data.DATA[0].NAME + ":" + data.DATA[0].AGE);
-													}, function(retTxt) {alert(retTxt);});
+	
 
+	objReqJson.setData("USID", $("#USID").val(), 0);
+	objReqJson.setData("PASSWORD", $("#PASSWORD").val(), 0);
+	objReqJson.setData("USNAME", $("#USNAME").val(), 0);
+	objReqJson.setData("LIFYEA", $("#LIFYEA").val(), 0);
+	objReqJson.setData("USE_F",$("#USE_F").val(), 0);
+	objReqJson.setData("DEPT_CODE", $("#DEPT_CODE").val(), 0);
+	objReqJson.setData("GRADE", $("#GRADE").val(), 0);
+
+	cmnFrame.callService(objReqJson, function(data) {
+		alert(data.HEADER["MSG"]);
+
+		$("#testZone").html(data.DATA[0].NAME + ":" + data.DATA[0].AGE);
+	}, function(retTxt) {
+		alert(retTxt);
+	});
 
 }
-
+function setVal(cont, val) {
+	$(cont).parent().parent().prev().prev().html($(cont).html());
+	$(cont).parent().parent().prev().val(val);
+}
 </script>
 </head>
 <body>
-<span onclick="callSvc();">호출</span>
-<div id="testZone"></div>
+<!-- <span onclick="callSvc();">호출</span>  -->
+<!-- <div id="testZone"></div> -->
+<div class="container">
+      <form class="form-signin">
+        <h2 class="form-signin-heading">사용자등록</h2>
+        <label for="USID" class="sr-only">USID</label>
+        <input type="text" id="USID" class="form-control" placeholder="사용자계정" required autofocus>
+        <label for="PASSWORD" class="sr-only">PASSWORD</label>
+        <input type="password" id="PASSWORD" class="form-control" placeholder="Password" required>
+        <label for="USNAME" class="sr-only">"USNAME"</label>
+        <input type="text" id="USNAME" class="form-control" placeholder="이름" required autofocus>
+        <label for="LIFYEA" class="sr-only">LIFYEA</label>
+        <input type="text" id="LIFYEA" class="form-control" placeholder="생년월일" required autofocus>
+    	<div class="dropdown"> 
+     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 사용여부 <span class="caret"></span></button>
+     <input id="USE_F" type="hidden" value="" />
+    	<ul class="dropdown-menu" role="menu"> 
+    	<li role="presentation"> <a href="#" onclick="setVal(this, 1);" >사용</a> </li> 
+    	<li role="presentation"> <a href="#" onclick="setVal(this, 0);">미사용</a> </li> 
+    	</ul> 
+    	</div>
+        <label for="DEPT_CODE" class="sr-only">DEPT_CODE</label>
+        <input type="text" id="DEPT_CODE" class="form-control" placeholder="부서" required autofocus>
+        <label for="GRADE" class="sr-only">GRADE</label>
+        <input type="text" id="GRADE" class="form-control" placeholder="등급" required autofocus>        
+
+
+             
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="INSERT_UER" onclick="callSvc();">사용자 등록</button>
+      </form>
+
+    </div> <!-- /container -->
 </body>
 </html>
