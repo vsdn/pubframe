@@ -41,46 +41,46 @@ function reqJson(obj)
 	
 
 	this.getSERVICE = function(value) {
-		this.setHeaderKey("SERVICE", value);
+		this.getHeaderKey("SERVICE");
 	};
 	this.getMETHOD = function(value) {
-		this.setHeaderKey("METHOD", value);
+		this.getHeaderKey("METHOD");
 	};
 	this.getMENU_ID = function(value) {
-		this.setHeaderKey("MENU_ID", value);
+		this.getHeaderKey("MENU_ID");
 	};
 	this.getASYNC = function(value) {
-		this.setHeaderKey("ASYNC", value);
+		this.getHeaderKey("ASYNC");
 	};
 	this.getPROGRESS_BAR = function(value) {
-		this.setHeaderKey("PROGRESS_BAR", value);
+		this.getHeaderKey("PROGRESS_BAR");
 	};
 	this.getTYPE = function(value) {
-		this.setHeaderKey("TYPE", value);
+		this.getHeaderKey("TYPE");
 	};
 	this.getURL = function(value) {
-		this.setHeaderKey("URL", value);
+		this.getHeaderKey("URL");
 	};
 	this.getCLIENT_TYPE = function(value) {
-		this.setHeaderKey("CLIENT_TYPE", value);
+		this.getHeaderKey("CLIENT_TYPE");
 	};
 	this.getCLIENT_META = function(value) {
-		this.setHeaderKey("CLIENT_META", value);
+		this.getHeaderKey("CLIENT_META");
 	};
 	this.getCONTROL_TYPE = function(value) {
-		this.setHeaderKey("CONTROL_TYPE", value);
+		this.getHeaderKey("CONTROL_TYPE");
 	};
 	this.getCONTROL_ID = function(value) {
-		this.setHeaderKey("CONTROL_ID", value);
+		this.getHeaderKey("CONTROL_ID");
 	};
 	this.getPAGES_CNT = function(value) {
-		this.setHeaderKey("PAGES_CNT", value);
+		this.getHeaderKey("PAGES_CNT");
 	};
 	this.getROW_CNT = function(value) {
-		this.setHeaderKey("ROW_CNT", value);
+		this.getHeaderKey("ROW_CNT");
 	};
 	this.getMAX_LIMIT = function(value) {
-		this.setHeaderKey("MAX_LIMIT", value);
+		this.getHeaderKey("MAX_LIMIT");
 	};
 
 	this.setSERVICE = function(value) {
