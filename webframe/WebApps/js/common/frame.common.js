@@ -1,3 +1,4 @@
+
 var cmnFrame = {
 		getClientType : function() {
 			return clientInformation.userAgent;
@@ -18,5 +19,17 @@ var cmnFrame = {
 		            errorFunc(e.responseText);
 		        }  
 		    });  
-		}		
+		},
+		
+		getCookie : function(){
+			return $.cookie('login_email');
+		},
+		
+		setCookie : function(){
+			 $.cookie('login_email', $("#inputEmail").val());
+		},
+		
+		removeCookie : function(){
+			$.removeCookie("login_id");
+		}
 }
