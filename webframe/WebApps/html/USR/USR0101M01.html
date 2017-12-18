@@ -11,13 +11,15 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/common/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/common/jsgrid.min.css" rel="stylesheet">
+	<link href="../../css/common/jsgrid-theme.min.css" rel="stylesheet">
     <link href="../../css/common/common.css" rel="stylesheet">
     <link href="../../css/USR/USR0101M01.css" rel="stylesheet">
 
     <script src="../../js/common/jquery-1.12.4.min.js"></script>
     <script src="../../js/common/frame.common.js"></script>
     <script src="../../js/common/frame.reqJson.js"></script>
-
+ 	<script src="../../js/common/jsgrid.min.js"></script>
     <script src="../../js/USR/USR0101M01.js"></script>
   </head>
 
@@ -51,7 +53,7 @@
   <div class="srchArea only">
   		<div class="headClass">
         <div class="titleClass"><span class="hIcon"></span><span class="hText">검색</span></div>
-        <div class="btnClass"><button class="btn btn-primary btn-sm">검색버튼</button></div>
+        <div class="btnClass"><button class="btn btn-primary btn-sm" id="srchUsr">검색버튼</button></div>
         </div>
    <div class="srchClass">
     <div class="srchDet">
@@ -59,7 +61,7 @@
        	<table>
 			<tr>
 				<th>검색어
-				<input class=txt_240 type="text" placeholder="검색어입력" aria-label="SearchUsr">
+				<input class=txt_240 type="text" placeholder="검색어입력" aria-label="SearchUsr" id="usrName">
 				</th> 
 			</tr>
 		</table>
