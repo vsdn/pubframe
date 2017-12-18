@@ -52,3 +52,86 @@ canvas {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+<!-- commons -->
+.nonDis {opacity:0; transition:0.6s;}
+.actDis {opacity:1; transition:0.4s;}
+.list550long { height:900px; } 
+.list660 { height:660px; } 
+.list600 { height:600px; } 
+.list500 { height:500px; } 
+.list550 { height:550px; } 
+.list450 { height:450px; } 
+.list450verylong { height:970px; } 
+.list450long { height:770px; } 
+.list450short { height:350px; } 
+.list400 { height:400px; } 
+.list380 { height:388px; } 
+.list350 { height:350px; } 
+.list300 { height:300px; } 
+.list240 { height:240px; }
+.list200 { height:200px; }
+.list160 { height:160px; }
+.list100 { height:100px; }
+.list60 { height:60px; }
+.list50 { height:50px; }
+
+.txt_240 {width:240px;}
+.txt_150 {width:150px;}
+.txt_120 {width:120px;}
+.txt_100 {width:100px;}
+.txt_100p {width:100%;}
+.txt_400 {width:400px;}
+.txt_600 {width:600px;}
+.txt2row {height:3em; margin-top:0.2em; margin-bottom:0.2em;}
+.readonly {background-color:#efefef;}
+
+<!-- eo commons-->
+
+<!-- navs -->
+
+
+<!-- eo navs-->
+
+<!-- contents -->
+main {background-color:#fefefe;}
+.only {clear:both;} 
+.headClass { width:100%; margin-top:1em; padding-top:0.6em; height:32px; border-bottom: 2px solid #999999;}
+
+
+
+.srchArea {width:100%; padding-top: 10px;}
+.srchArea .headClass { width:100%; }
+.srchArea .headClass .titleClass {width:30%; float:left;}
+.srchArea .headClass .btnClass {width:70%; float:right; text-align:right;}
+.srchArea .srchClass {width:100%;}
+.srchArea .srchClass .srchDet {clear:both; padding-top: 10px;}
+.srchArea .srchClass .srchDet form table {border: 1px solid #a6c7e8; border-radius:6px; width:100%;}
+.srchArea .srchClass .srchDet form table th {padding-left:10px; padding-right:10px; text-align:left; height:50px; background-color:#dae9f7; vertical-align:middle;}
+
+.listArea {width:100%;}
+.listArea .headClass {width:100%; }
+.listArea .headClass .titleClass {width:30%; float:left;}
+.listArea .headClass .btnClass {width:70%; float:right; text-align:right;}
+.listArea .listClass {width:100%;}
+.listArea .listClass .listDiv {width:100%;}
+
+.detArea {width:100%;}
+.detArea .headClass {width:100%; }
+.detArea .headClass .titleClass {width:30%; float:left;}
+.detArea .headClass .btnClass {width:70%; float:right; text-align:right;}
+.detArea .detDet {width:100%;}
+.detArea .detDet .detTable {width:100%;}
+.detArea .detDet .detTable table {width:100%;}
+.detArea .detDet .detTable table tr {width:100%;}
+.detArea .detDet .detTable table tr th {letter-spacing:0.1em; text-align:left; padding-left:10px; padding-right:10px; height:24px; background-color:#eff8ff;color:4d4d4d;font-weight:normal;}
+.detArea .detDet .detTable table tr td { text-align:left; padding-left:5px; padding-right:10px; }
+.detArea .detDet .detTable table tr td button,input,select,textarea{ width:100% }
+
+
+
+
+
+
+
+<!-- eo contents-->

@@ -46,69 +46,92 @@
     </form>
   </div>
 </nav>
-
+<!-- container -->
 <main role="main" class="container">
-  <div class="srchArea">
+  <div class="srchArea only">
   		<div class="headClass">
         <div class="titleClass"><span class="hIcon"></span><span class="hText">검색</span></div>
         <div class="btnClass"><button class="btn btn-primary btn-sm">검색버튼</button></div>
         </div>
    <div class="srchClass">
     <div class="srchDet">
-       <form class="form-inline mt-2 mt-md-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="검색어입력" aria-label="SearchUsr">
-    </form>
+       <form>
+       	<table>
+			<tr>
+				<th>검색어
+				<input class=txt_240 type="text" placeholder="검색어입력" aria-label="SearchUsr">
+				</th> 
+			</tr>
+		</table>
+    	</form>
     </div>
    </div>
  </div>
- 	<div class="listArea">
+ 	<div class="listArea only">
  		<div class="headClass">
  	  <div class="titleClass"><span class="hIcon"></span><span class="hText">유저리스트</span></div>
       <div class="btnClass"><button class="btn btn-primary btn-sm">엑셀</button></div>
       </div>
  		<div class="listClass">
-    		 <div class="listDiv">
+    		 <div class="listDiv list600">
        				<div id="divUsrList"></div>
    			 </div>
    		</div>
     </div>
     
-    <div class="detArea">
-    <div class="headClass">
-   		<div class="titleClass"><span class="hIcon"></span><span class="hText">유저상세</span></div>
-        <div class="btnClass">
-        </div>
-        <button  class="btn btn-primary btn-sm">버튼1</button>
-        <button  class="btn btn-primary btn-sm">버튼2</button>
-        <button  class="btn btn-primary btn-sm">버튼3</button>
-        <button  class="btn btn-primary btn-sm">버튼4</button>
-        </div>
-        <div class="detDet">
-           <form>
-        	<div class="detTable">
-        		<table border="1">
-    				<tr>
-    					<th>사용자명</th> <td> <input type="text" name="" id="USNAME" /> </td>
-     					<th>사용자ID</th> <td> <input type="text" name="" id="USID" /> </td>
-       					<th>로그인여부</th> <td "> <select name="LOGIN_F" id="LOGIN_F" style="width:100%">  <option value="온라인">온라인</option><option value="오프라인">오프라인</option></select> </td>
-        				<th>최종로그인일자</th> <td> <input type="text" name="" id="LAST_LOGIN_DATE" />  </td>
-    				</tr>
-   					<tr>
-     					<th>생년월일</th> <td> <input type="text" name="" id="LIFYEA" />  </td>
-    					<th>사용여부</th> <td> <select name="USE_F" id="USE_F" style="width:100%"> <option value="사용">사용</option><option value="미사용">미사용</option></select></td>
-     					<th>부서</th> <td> <input type="DEPT_CODE" name="" id="DEPT_CODE" />  </td>
-      					<th>등급</th> <td> <input type="text" name="" id="GRADE" />  </td>
-    				</tr>
-       				<tr>
-     					<th>생성자</th> <td> <input type="text" name="" id="SYS_FRST_USNO" />  </td>
-   						<th>생성일</th> <td> <input type="text" name="" id="SYS_FRST_DATE" /> </td>
-     					<th>변경자</th> <td> <input type="text" name="" id="SYS_UPDT_USNO" />   </td>
-      					<th>변경일</th> <td> <input type="text" name="" id="SYS_UPDT_DATE" />   </td>
-    				</tr>
-    			</table>
-        	</div>
-         </form>
-        </div>
+    <div class="detArea only">
+	    <div class="headClass">
+	   		<div class="titleClass">
+		   		<span class="hIcon"></span>
+		   		<span class="hText">유저상세</span>
+	   		</div>
+	        <div class="btnClass">
+		        <button  class="btn btn-primary btn-sm">버튼1</button>
+		        <button  class="btn btn-primary btn-sm">버튼2</button>
+		        <button  class="btn btn-primary btn-sm">버튼3</button>
+		        <button  class="btn btn-primary btn-sm">버튼4</button>
+	        </div>
+	    </div>
+	        <div class="detDet">
+	           <form>
+	        	<div class="detTable">
+	        		<table>
+	    				<tr>
+	    					<th>사용자명</th> 
+	    					<td> <input type="text" name="" id="USNAME" /> </td>
+	     					<th>사용자ID</th> 
+	     					<td> <input type="text" name="" id="USID" /> </td>
+	       					<th>로그인여부</th> 
+	       					<td> <select name="LOGIN_F" id="LOGIN_F">  <option value="온라인">온라인</option><option value="오프라인">오프라인</option></select> </td>
+	        				<th>최종로그인일자</th> 
+	        				<td> <input type="text" name="" id="LAST_LOGIN_DATE" />  </td>
+	    				</tr>
+	   					<tr>
+	     					<th>생년월일</th> 
+	     					<td> <input type="text" name="" id="LIFYEA" />  </td>
+	    					<th>사용여부</th> 
+	    					<td> <select name="USE_F" id="USE_F" > <option value="사용">사용</option><option value="미사용">미사용</option></select></td>
+	     					<th>부서</th> 
+	     					<td> <input type="text" name="" id="DEPT_CODE" />  </td>
+	      					<th>등급</th> 
+	      					<td> <input type="text" name="" id="GRADE" />  </td>
+	    				</tr>
+	       				<tr>
+	     					<th>생성자</th> 
+	     					<td> <input type="text" name="" id="SYS_FRST_USNO" />  </td>
+	   						<th>생성일</th> 
+	   						<td> <input type="text" name="" id="SYS_FRST_DATE" /> </td>
+	     					<th>변경자</th> 
+	     					<td> <input type="text" name="" id="SYS_UPDT_USNO" />   </td>
+	      					<th>변경일</th> 
+	      					<td> <input type="text" name="" id="SYS_UPDT_DATE" />   </td>
+	    				</tr>
+	    			</table>
+	        	</div>
+	          </form>
+	        </div>
+    </div>
+        
 </main><!-- container -->
   </body>
 </html>
