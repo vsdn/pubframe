@@ -95,7 +95,7 @@ canvas {
 
 <!-- contents -->
 main {background-color:#fefefe;}
-.container { margin-top:2em;}
+.container { margin-top:2em; max-width:90%}
 .only {clear:both;} 
 .headClass { width:100%; margin-top:1em; padding-top:0.6em; height:32px; border-bottom: 2px solid #999999;}
 

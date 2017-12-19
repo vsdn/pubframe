@@ -31,5 +31,7 @@ var cmnFrame = {
 		
 		removeCookie : function(){
 			$.removeCookie("login_id");
-		}
+		},
+		
+
 }

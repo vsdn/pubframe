@@ -33,11 +33,16 @@ public class svcHost {
 		responseJsonVO resVO = null;
 
 		//cmnLog.Debug(reqVO.HEADER.getTYPE());
+		
 		if("InsertUser".equals(reqVO.HEADER.getMETHOD()))
 		{
 			resVO = InsertUser(reqVO);
 		}
-			
+		else if("SelectUser".equals(reqVO.HEADER.getMETHOD()))
+		{
+			resVO = SelectUser(reqVO);
+		}
+				
 		svcTest svcTest = new svcTest();
 		
 		//SESSION VO SET	
@@ -96,7 +101,39 @@ public class svcHost {
 		sQuery1 += sQuery2;
 		
 		cmnLog.Debug(sQuery1);
-		resVO = objDbCon.getDbcpResult(reqVO, sQuery1);
+		resVO = objDbCon.insertUserResult(reqVO, sQuery1);
+		
+		
+		
+		
+		return resVO;
+	}
+	private responseJsonVO SelectUser(requestJsonVO reqVO) {
+		
+		responseJsonVO resVO = new responseJsonVO();	
+		cmnDbCon objDbCon = new cmnDbCon();
+		
+		
+		String sQuery = "";
+	
+
+		sQuery = 	"SELECT USID, USNO, PASSWORD, (CASE ISNULL(LOGIN_F,0) WHEN 1 THEN 'Y' ELSE 'N' END)  as LOGIN_F, FAILR_CNT, LAST_LOGIN_DATE, USNAME, LIFYEA,  (CASE ISNULL(USE_F,0) WHEN 1 THEN 'Y' ELSE 'N' END) as USE_F, DEPT_CODE, GRADE, SYS_FRST_USNO, SYS_FRST_DATE, SYS_UPDT_USNO, SYS_UPDT_DATE\r\n" + 
+					"FROM   NAEDU.dbo.TFRWUSR0101M (NOLOCK) ";
+		
+		HashMap map = (HashMap)reqVO.DATA.get(0);
+		
+		cmnLog.Debug(reqVO.HEADER.getTYPE());
+		
+		if(("ID").equals((String) map.get("STYPE")))
+		{
+			sQuery += "WHERE USID like '%' + ? + '%'";
+		}
+		else
+		{
+			sQuery += "WHERE USNAME like '%' + ? + '%'";
+		}
+
+		resVO = objDbCon.SelectUserResult(reqVO, sQuery);
 		
 		
 		

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>유저조회</title>
+    <title>유저관리화면</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/common/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +54,7 @@
   <div class="srchArea only">
   		<div class="headClass">
         <div class="titleClass"><span class="hIcon icon i-circle-right2 blue-icon"></span><span class="hText">검색</span></div>
-        <div class="btnClass"><button class="btn btn-primary btn-sm">검색버튼</button></div>
+        <div class="btnClass"><button class="btn btn-primary btn-sm" id="srchUsr">검색버튼</button></div>
         </div>
    <div class="srchClass">
     <div class="srchDet">
@@ -62,7 +62,8 @@
        	<table>
 			<tr>
 				<th>검색어
-				<input class=txt_240 type="text" placeholder="검색어입력" aria-label="SearchUsr">
+				<select class=txt_100 name="Srch_F" id="Srch_F" > <option value="ID">ID</option><option value="이름">이름</option></select>
+				<input class=txt_240 type="text" placeholder="검색어입력" aria-label="SearchUsr" id="srchUserInfo">
 				</th> 
 			</tr>
 		</table>
@@ -89,15 +90,15 @@
 		   		<span class="hText">유저상세</span>
 	   		</div>
 	        <div class="btnClass">
-		        <button  class="btn btn-primary btn-sm">버튼1</button>
-		        <button  class="btn btn-primary btn-sm">버튼2</button>
-		        <button  class="btn btn-primary btn-sm">버튼3</button>
-		        <button  class="btn btn-primary btn-sm">버튼4</button>
+		        <button  class="btn btn-primary btn-sm" id="btnReset">초기화</button>
+		        <button  class="btn btn-primary btn-sm" id="btnNew">신규</button>
+		        <button  class="btn btn-primary btn-sm" id="btnUpdate">삭제</button>
+		        <button  class="btn btn-primary btn-sm" id="btnSave">저장</button>
 	        </div>
 	    </div>
 	        <div class="detDet">
-	           <form>
-	        	<div class="detTable">
+	           <form id="detForm">
+	        	<div class="detTable" >
 	        		<table>
 	    				<tr>
 	    					<th>사용자명</th> 
