@@ -42,7 +42,6 @@ public class cmnSvcUtil {
 		 int i = 0;
 		 while (enu.hasMoreElements()) {
 		  String strName= (String) enu.nextElement();
-		  //cmnLog.Debug(strName + ":" + req.getParameter(strName));
 		  
 			if(strName.substring(0,4).equals("DATA")){
 				int _index = strName.indexOf("]");
@@ -54,8 +53,8 @@ public class cmnSvcUtil {
 				idx = strName.substring(_indexFirst+1,_index);
 				Key = strName.substring(_index+2,strName.length()-1);
 				Val = cmnUtil.getParam(req, strName);
-				cmnLog.Debug(idx + "|" + Key + "|" + Val);
-		         setData(objVO, Integer.parseInt(idx), Key, Val);
+
+		        setData(objVO, Integer.parseInt(idx), Key, Val);
 
 				//hDataMap.setString(strName.substring(_index+2,strName.length()-1), Integer.parseInt(strName.substring(_indexFirst+1,_index)), objRequest.getParameterValues(strName)[i], strName.substring(0, _indexFirst));
 			}
@@ -67,13 +66,11 @@ public class cmnSvcUtil {
 		     Iterator<String> iterator = map.keySet().iterator();
 		     while (iterator.hasNext()) {
 		         String key = (String) iterator.next();
-		        cmnLog.Debug("key="+key + ":" + " value="+map.get(key));
 		     }
 		 }
 	     Iterator<String> iterator = hDataMap.keySet().iterator();
 	     while (iterator.hasNext()) {
 	         String key = (String) iterator.next();
-	         //cmnLog.Debug("key="+key + ":" + " value="+hDataMap.get(key));
 	     }
 
 		return objVO;

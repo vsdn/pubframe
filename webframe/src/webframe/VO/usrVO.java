@@ -121,7 +121,14 @@ public class usrVO {
 	public void setSYS_UPDT_DATE(String sYS_UPDT_DATE) {
 		SYS_UPDT_DATE = sYS_UPDT_DATE;
 	}
+	public String getRM() {
+		return RM;
+	}
 
+	public void setRM(String rM) {
+		RM = rM;
+	}
+	
 	public String USID;
 	public String USNO;
 	public String PASSWORD;
@@ -137,6 +144,7 @@ public class usrVO {
 	public String SYS_FRST_DATE;
 	public String SYS_UPDT_USNO;
 	public String SYS_UPDT_DATE;
+	public String RM;
 	
 	public usrVO() {
 		USID = "";
@@ -154,8 +162,10 @@ public class usrVO {
 		SYS_FRST_DATE = "";
 		SYS_UPDT_USNO = "";
 		SYS_UPDT_DATE = "";
+		RM= "";
 	}
-	
+
+
 
 
 	

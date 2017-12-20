@@ -67,9 +67,12 @@ public class cmnDb {
 		return affCnt;
 	}
 	public List<Object> executeSelect(Connection con, String sql, ArrayList arrParams, Object objVO ) {
+		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
+	
 		ArrayList<Object> arrRet = new ArrayList<Object>();
+	
 		try {
 			stmt = con.prepareStatement(sql);
 			stmt = setParams(stmt, arrParams);

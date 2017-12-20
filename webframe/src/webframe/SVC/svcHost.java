@@ -41,8 +41,15 @@ public class svcHost {
 		else if("SelectUser".equals(reqVO.HEADER.getMETHOD()))
 		{
 			resVO = SelectUser(reqVO);
+		}	
+		else if("DeleteUser".equals(reqVO.HEADER.getMETHOD()))
+		{
+			resVO = DeleteUser(reqVO);
 		}
-				
+		else if("UpdateUser".equals(reqVO.HEADER.getMETHOD()))
+		{
+			resVO = UpdateUser(reqVO);
+		}		
 		svcTest svcTest = new svcTest();
 		
 		//SESSION VO SET	
@@ -96,8 +103,8 @@ public class svcHost {
 		     }
 		 }*/
 		 
-		sQuery1 = "INSERT INTO NAEDU.dbo.TFRWUSR0101M  (	USID, PASSWORD, USNAME, LIFYEA, USE_F,DEPT_CODE, GRADE, SYS_FRST_DATE ) VALUES ";
-		sQuery2 = ("(?, ?, ?, ?, ?, ?,?, GETDATE())");
+		sQuery1 = "INSERT INTO NAEDU.dbo.TFRWUSR0101M  (	USID, PASSWORD, USNAME, LIFYEA, USE_F,DEPT_CODE, GRADE, RM, SYS_FRST_DATE ) VALUES ";
+		sQuery2 = ("(?, ?, ?, ?, ?, ?,?,?, GETDATE())");
 		sQuery1 += sQuery2;
 		
 		cmnLog.Debug(sQuery1);
@@ -117,7 +124,7 @@ public class svcHost {
 		String sQuery = "";
 	
 
-		sQuery = 	"SELECT USID, USNO, PASSWORD, (CASE ISNULL(LOGIN_F,0) WHEN 1 THEN 'Y' ELSE 'N' END)  as LOGIN_F, FAILR_CNT, LAST_LOGIN_DATE, USNAME, LIFYEA,  (CASE ISNULL(USE_F,0) WHEN 1 THEN 'Y' ELSE 'N' END) as USE_F, DEPT_CODE, GRADE, SYS_FRST_USNO, SYS_FRST_DATE, SYS_UPDT_USNO, SYS_UPDT_DATE\r\n" + 
+		sQuery = 	"SELECT USID, USNO, PASSWORD, (CASE ISNULL(LOGIN_F,0) WHEN 1 THEN 'Y' ELSE 'N' END)  as LOGIN_F, FAILR_CNT, CONVERT(VARCHAR(10),LAST_LOGIN_DATE,23) as LAST_LOGIN_DATE, USNAME,  CONVERT(VARCHAR(10),LIFYEA,23) as LIFYEA,  (CASE ISNULL(USE_F,0) WHEN 1 THEN 'Y' ELSE 'N' END) as USE_F, DEPT_CODE, GRADE, SYS_FRST_USNO, CONVERT(VARCHAR(10),SYS_FRST_DATE,23) as SYS_FRST_DATE, SYS_UPDT_USNO, CONVERT(VARCHAR(10),SYS_UPDT_DATE,23) as SYS_UPDT_DATE,RM\r\n" + 
 					"FROM   NAEDU.dbo.TFRWUSR0101M (NOLOCK) ";
 		
 		HashMap map = (HashMap)reqVO.DATA.get(0);
@@ -134,6 +141,59 @@ public class svcHost {
 		}
 
 		resVO = objDbCon.SelectUserResult(reqVO, sQuery);
+		
+		
+		
+		
+		return resVO;
+	}
+	private responseJsonVO DeleteUser(requestJsonVO reqVO) {
+		
+		responseJsonVO resVO = new responseJsonVO();	
+		cmnDbCon objDbCon = new cmnDbCon();
+		usrVO	usrVO = new usrVO();
+		
+		
+		String sQuery = "";
+	
+
+		 
+		sQuery = "DELETE NAEDU.dbo.TFRWUSR0101M WHERE USNO = ? ";
+
+		
+		cmnLog.Debug(sQuery);
+		resVO = objDbCon.deleteUserResult(reqVO, sQuery);
+		
+		
+		
+		
+		return resVO;
+	}
+	private responseJsonVO UpdateUser(requestJsonVO reqVO) {
+		
+		responseJsonVO resVO = new responseJsonVO();	
+		cmnDbCon objDbCon = new cmnDbCon();
+		usrVO	usrVO = new usrVO();
+		
+		
+		String sQuery = "";
+	
+
+		 
+		sQuery =  " UPDATE 	NAEDU.dbo.TFRWUSR0101M " +
+				  " SET		USNAME = ?, " +
+				  " 		USID = ?, " +
+				  " 		LIFYEA = ?, " +
+				  " 		USE_F = ?, " +
+				  " 		DEPT_CODE = ?, " +
+				  " 		GRADE = ?, " +
+				  " 		RM = ?, " +
+				  "			SYS_UPDT_DATE = GETDATE() " +		
+				  " WHERE USNO = ? ";
+
+		
+		cmnLog.Debug(sQuery);
+		resVO = objDbCon.updateUserResult(reqVO, sQuery);
 		
 		
 		
