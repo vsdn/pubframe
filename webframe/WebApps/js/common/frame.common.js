@@ -30,7 +30,7 @@ var cmnFrame = {
 			$.removeCookie(cookie_id);
 		},
 		setFormDataClear:function(objFormID){
-			  $(objFormID).each(function() {  
+			  $($("#" + objFormID)).each(function() {  
 		            this.reset();  
 		         });  
 		},
