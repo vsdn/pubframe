@@ -35,7 +35,7 @@ var USR0101M01={
 			   	USR0101M01.srchUsr();
 			   	USR0101M01.initBasicModeControl();})
 		   $("#btnNew").click(function(e){
-			   USR0101M01.setFormDataClear($("#detForm"));
+			   cmnFrame.setFormDataClear($("#detForm"));
 			   $("#btnNew").hide();
 			   $("#btnCancel").show();
 			   $("#btnDelete").show();
@@ -114,7 +114,7 @@ var USR0101M01={
 		                ]
 		        , rowClick: function(e) {
 		    		//window.hItem = e.item;
-		        	USR0101M01.setFormDataClear($("#detForm"));
+		        	cmnFrame.setFormDataClear($("#detForm"));
 		        	USR0101M01.setFormData(e.item);
 		        	$("#btnNew").hide();
 		        	$("#btnCancel").show();
@@ -186,14 +186,9 @@ var USR0101M01={
 				alert("실패");
 			});
 		},
-		setFormDataClear:function(objFormID){
-			  $(objFormID).each(function() {  
-		            this.reset();  
-		         });  
 
-		},
 		initBasicModeControl:function(){
-			 USR0101M01.setFormDataClear($("#detForm"));
+			cmnFrame.setFormDataClear($("#detForm"));
 			 $("#btnNew").show();
 			 $("#btnCancel").hide();
 			 $("#btnDelete").show();

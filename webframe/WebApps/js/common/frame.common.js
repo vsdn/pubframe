@@ -4,7 +4,7 @@ var cmnFrame = {
 			return clientInformation.userAgent;
 		},
 		callService : function(obj, successFunc, errorFunc) {
-		 $.ajax({      
+			$.ajax({      
 		        type:"POST",  
 		        dataType : 'json',
 		        url:"/webframe/api/svc.jsp",      
@@ -18,20 +18,20 @@ var cmnFrame = {
 		            alert(e.responseText);  
 		            errorFunc(e.responseText);
 		        }  
-		    });  
+			});  
 		},
-		
-		getCookie : function(){
-			return $.cookie('login_email');
+		getCookie : function(cookie_id){
+			return $.cookie(cookie_id);
 		},
-		
-		setCookie : function(){
-			 $.cookie('login_email', $("#inputEmail").val());
+		setCookie : function(cookie_id, cookie_val){
+			 $.cookie(cookie_id, cookie_val);
 		},
-		
-		removeCookie : function(){
-			$.removeCookie("login_id");
+		removeCookie : function(cookie_id){
+			$.removeCookie(cookie_id);
 		},
-		
-
+		setFormDataClear:function(objFormID){
+			  $(objFormID).each(function() {  
+		            this.reset();  
+		         });  
+		},
 }
