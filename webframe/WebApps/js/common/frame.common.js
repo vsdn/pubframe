@@ -34,4 +34,14 @@ var cmnFrame = {
 		            this.reset();  
 		         });  
 		},
+		setJsonData:function(obj,objFormID,idx){
+			var i = 0;
+			for(i = 0; i < $("#" + objFormID ).find("textarea,input[type=text],input[type=password]").length ; i ++ ){
+				obj.setData($("#" + objFormID).find("textarea,input[type=text],input[type=password]")[i].id, $($("#" + $("#"+objFormID).find("textarea,input[type=text],input[type=password]")[i].id)).val(), idx);
+			}
+			for(i = 0; i <$("#" + objFormID).serializeArray().length ; i ++ ){
+				obj.setData($("#" + objFormID).serializeArray()[i].name, $("#" + objFormID).serializeArray()[i].value, idx);
+			}
+			  return obj;
+		}
 }

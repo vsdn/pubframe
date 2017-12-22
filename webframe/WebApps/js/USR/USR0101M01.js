@@ -213,8 +213,8 @@ var USR0101M01={
 		$("#SYS_UPDT_DATE").val(obj.SYS_UPDT_DATE);
 		$("#RM").val(obj.RM);
 		$("#USNO").val(obj.USNO);
-		"Y" == obj.USE_F  ? $("#USE_F").val("사용").prop("selected", true) : $("#USE_F").val("미사용").prop("selected", true);
-		"Y" == obj.LOGIN_F  ? $("#LOGIN_F").val("온라인").prop("selected", true) : $("#LOGIN_F").val("오프라인").prop("selected", true);
+		"Y" == obj.USE_F  ? $("#USE_F").val("1").prop("selected", true) : $("#USE_F").val("0").prop("selected", true);
+		"Y" == obj.LOGIN_F  ? $("#LOGIN_F").val("1").prop("selected", true) : $("#LOGIN_F").val("0").prop("selected", true);
 		},
 		
 		srchUsrValidationChk:function(){
@@ -245,8 +245,10 @@ var USR0101M01={
     		objReqJson.setROW_CNT("100");
     		objReqJson.setMAX_LIMIT("3000");
     		
+    		
+    		objReqJson = cmnFrame.setJsonData(objReqJson,'detForm',0);
 
-    		objReqJson.setData("USID", $("#USID").val(), 0);
+    		/*objReqJson.setData("USID", $("#USID").val(), 0);
     		objReqJson.setData("PASSWORD", "mew12345", 0);
     		objReqJson.setData("USNAME", $("#USNAME").val(), 0);
     		objReqJson.setData("LIFYEA", $("#LIFYEA").val(), 0);
@@ -254,7 +256,7 @@ var USR0101M01={
     		objReqJson.setData("DEPT_CODE", $("#DEPT_CODE").val(), 0);
     		objReqJson.setData("GRADE", $("#GRADE").val(), 0);
     		objReqJson.setData("RM", $("#RM").val(), 0);
-
+*/
     		cmnFrame.callService(objReqJson, function(data) {
     			alert(data.HEADER["MSG"]);
 
@@ -263,7 +265,7 @@ var USR0101M01={
     		});	
 		},
     	updateExistUsr:function(){
-var objReqJson = new reqJson();
+    		var objReqJson = new reqJson();
     		
     		objReqJson.createBaseGroup();
     		objReqJson.setSERVICE("USR0101M01");
@@ -281,7 +283,8 @@ var objReqJson = new reqJson();
     		objReqJson.setROW_CNT("100");
     		objReqJson.setMAX_LIMIT("3000");
     		
-
+    		objReqJson = cmnFrame.setJsonData(objReqJson,'detForm',0);
+/*
     		objReqJson.setData("USNAME", $("#USNAME").val(), 0);
     		objReqJson.setData("USID", $("#USID").val(), 0);
     		objReqJson.setData("USNO", $("#USNO").val(), 0);
@@ -290,7 +293,7 @@ var objReqJson = new reqJson();
     		objReqJson.setData("DEPT_CODE", $("#DEPT_CODE").val(), 0);
     		objReqJson.setData("GRADE", $("#GRADE").val(), 0);
     		objReqJson.setData("RM", $("#RM").val(), 0);
-    		
+  */  		
     		cmnFrame.callService(objReqJson, function(data) {
     			alert(data.HEADER["MSG"]);
 
@@ -317,8 +320,10 @@ var objReqJson = new reqJson();
     		objReqJson.setROW_CNT("100");
     		objReqJson.setMAX_LIMIT("3000");
     		
-
+    		objReqJson = cmnFrame.setJsonData(objReqJson,'detForm',0);
+    		/*
     		objReqJson.setData("USNO", $("#USNO").val(), 0);
+    	*/
     		cmnFrame.callService(objReqJson, function(data) {
     			alert(data.HEADER["MSG"]);
 

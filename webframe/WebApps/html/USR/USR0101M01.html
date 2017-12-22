@@ -19,11 +19,11 @@
     <link href="../../css/USR/USR0101M01.css" rel="stylesheet">
 	  
     <script src="../../js/common/jquery-1.12.4.min.js"></script>
-        <script src="../../js/common/jquery-ui.min.js"></script>
+    <script src="../../js/common/jquery-ui.min.js"></script>
+   	<script src="../../js/common/bootstrap.bundle.min.js"></script> 
+    <script src="../../js/common/jsgrid.min.js"></script>
     <script src="../../js/common/frame.common.js"></script>
     <script src="../../js/common/frame.reqJson.js"></script>
- 	<script src="../../js/common/jsgrid.min.js"></script>
- 	<script src="../../js/common/bootstrap.min.js"></script>
  	<script src="../../js/USR/USR0101M01.js"></script>
   </head>
 
@@ -111,21 +111,21 @@
 	       					<th>사용자NO</th> 
 	     					<td> <input type="text" name="" id="USNO" class="readonly"/> </td>
 	       					<th>로그인여부</th> 
-	       					<td> <select name="LOGIN_F" id="LOGIN_F" class="readonly" >  <option value="온라인">온라인</option><option value="오프라인">오프라인</option></select> </td> 
+	       					<td> <select name="LOGIN_F" id="LOGIN_F" class="readonly" >  <option value="1">온라인</option><option value="0">오프라인</option></select> </td> 
 	        				<th>최종로그인일자</th> 
-	        				<td> <input class="readonly" type="text" name="" id="LAST_LOGIN_DATE" />  </td>
+	        				<td> <input style="width:90%;" class="readonly" type="text" name="" id="LAST_LOGIN_DATE" />  </td>
 	    				</tr>
 	   					<tr>
 	     					<th>생년월일</th> 
 	     					<td> <input style="width:90%;" class="datepicker" type="text" name="" id="LIFYEA" />  </td>
 	    					<th>사용여부</th> 
-	    					<td> <select name="USE_F" id="USE_F" > <option value="사용">사용</option><option value="미사용">미사용</option></select></td>
+	    					<td> <select name="USE_F" id="USE_F" > <option value="1">사용</option><option value="0">미사용</option></select></td>
 	     					<th>부서</th> 
 	     					<td> <input type="text" name="" id="DEPT_CODE" />  </td>
 	      					<th>등급</th> 
 	      					<td> <input type="text" name="" id="GRADE" />  </td>
-	      					<th rowspan = 2>비고</th> 
-	      					<td rowspan = 2> <input type="text" name="" id="RM" style="height:40px" />  </td>
+	      					<th>비고</th> 
+	      					<td> <textarea name="textarea"  name="" id="RM" style="height:40px" ></textarea>  </td>
 	    				</tr>
 	       				<tr>
 	     					<th>생성자</th> 
@@ -136,6 +136,8 @@
 	     					<td> <input type="text" name="" id="SYS_UPDT_USNO" class="readonly"/>   </td>
 	      					<th>변경일</th> 
 	      					<td> <input class="readonly" type="text" name="" id="SYS_UPDT_DATE" />   </td>
+	      					<th>비밀번호</th> 
+	      					<td><input class="" type="text" name="" id="PASSWORD" />   </td>
 	    				</tr>
 	    			</table>
 	        	</div>
