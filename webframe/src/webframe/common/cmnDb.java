@@ -13,6 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import webframe.VO.responseJsonVO;
+
 public class cmnDb {
 	public Connection getConnection() {
 		Context context;
@@ -108,7 +110,55 @@ public class cmnDb {
 
 		return arrRet;
 	}
-
+	
+	public responseJsonVO executeSelect(Connection con, String sql, ArrayList<Object> arrParams, Object objVO, responseJsonVO resVO ) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+	
+		ArrayList<Object> arrRet = new ArrayList<Object>();
+		StringBuffer sb = new StringBuffer();
+	
+		int i = 0;
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt = setParams(stmt, arrParams);
+			rs = stmt.executeQuery();
+			
+			//MetaData
+			ResultSetMetaData rsMeta = rs.getMetaData();
+			for(i = 0; i < rsMeta.getColumnCount();i++) {
+				if(i > 0) {
+					sb.append("|");
+				}
+				sb.append(rsMeta.getColumnLabel(i + 1));
+			}
+			
+			//Data
+			while(rs.next()) {
+				Object objTgt = cmnUtil.getInstance(objVO.getClass().getName());
+				setVO(objTgt, rs);
+				arrRet.add(objTgt);
+			}
+			
+		} catch (SQLException e) {
+			cmnLog.Error(e);
+		} finally {
+			try {
+				if (stmt.isClosed() == false) {
+					stmt.close();
+				}
+			} catch (Exception e) {
+				cmnLog.Error(e);
+			}
+		}
+		
+		resVO.HEADER.setCOUNT(String.valueOf(arrRet.size()));
+		resVO.HEADER.setCOL_NAMES(sb.toString());
+		resVO.DATA = arrRet;
+		return resVO;
+	}
 	private void setVO(Object objVO, ResultSet rs) {
 		int i = 0;
 		
@@ -117,7 +167,7 @@ public class cmnDb {
 				ResultSetMetaData rsMeta = rs.getMetaData();
 				
 				for(i = 0; i < rsMeta.getColumnCount(); i++) {
-					String colName = rsMeta.getColumnName(i + 1);
+					String colName = rsMeta.getColumnLabel(i + 1);
 					cmnUtil.setVar(objVO, colName, rs.getString(i + 1));
 				}
 			}

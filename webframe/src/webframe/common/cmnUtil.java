@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,22 +37,32 @@ public class cmnUtil {
 		return objRet;
 	}
 	public static void setVar(Object objVO, String fieldName, String value) {
-		try {
-	        Field field = objVO.getClass().getDeclaredField(fieldName);
-	        
-	        if (field.getType() == Character.TYPE) {field.set(objVO, value.charAt(0)); return;}
-	        if (field.getType() == Short.TYPE) {field.set(objVO, Short.parseShort(value)); return;}
-	        if (field.getType() == Integer.TYPE) {field.set(objVO, Integer.parseInt(value)); return;}
-	        if (field.getType() == Long.TYPE) {field.set(objVO, Long.parseLong(value)); return;}
-	        if (field.getType() == Float.TYPE) {field.set(objVO, Float.parseFloat(value)); return;}
-	        if (field.getType() == Double.TYPE) {field.set(objVO, Double.parseDouble(value)); return;}
-	        if (field.getType() == Byte.TYPE) {field.set(objVO, Byte.parseByte(value)); return;}
-	        if (field.getType() == Boolean.TYPE) {field.set(objVO, Boolean.parseBoolean(value)); return;}
-	        field.set(objVO, value);
-			
-		} catch(Exception e) {
-			cmnLog.Error(e);
-		}
+
+			try {
+				//set Value By setter
+				Method method = ((Class<?>) objVO).getMethod("set" + fieldName, String.class);
+				method.invoke(objVO, value);
+			} catch(Exception e) {
+				cmnLog.Error("cmn.setVarsInvokeError" + "[" + fieldName + "][" + value + "]");
+				cmnLog.Error(e);
+				try {
+					Field field = objVO.getClass().getDeclaredField(fieldName);
+			        
+			        if (field.getType() == Character.TYPE) {field.set(objVO, value.charAt(0)); return;}
+			        if (field.getType() == Short.TYPE) {field.set(objVO, Short.parseShort(value)); return;}
+			        if (field.getType() == Integer.TYPE) {field.set(objVO, Integer.parseInt(value)); return;}
+			        if (field.getType() == Long.TYPE) {field.set(objVO, Long.parseLong(value)); return;}
+			        if (field.getType() == Float.TYPE) {field.set(objVO, Float.parseFloat(value)); return;}
+			        if (field.getType() == Double.TYPE) {field.set(objVO, Double.parseDouble(value)); return;}
+			        if (field.getType() == Byte.TYPE) {field.set(objVO, Byte.parseByte(value)); return;}
+			        if (field.getType() == Boolean.TYPE) {field.set(objVO, Boolean.parseBoolean(value)); return;}
+	
+			        field.set(objVO, value);
+				} catch(Exception ex) {
+					cmnLog.Error("cmn.setVarsFieldError" + "[" + fieldName + "][" + value + "]");
+					cmnLog.Error(ex);
+				}
+			}
     }
 	public static String getConfig(String key) {
 		String ret = "";

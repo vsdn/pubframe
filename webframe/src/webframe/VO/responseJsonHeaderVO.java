@@ -16,6 +16,7 @@ public class responseJsonHeaderVO {
 	private String REQ_TIME;
 	private String RES_TIME;
 	private String MAX_FLAG;
+	private String COL_NAMES;
 
 	public responseJsonHeaderVO() {
 		COUNT = "";
@@ -28,10 +29,19 @@ public class responseJsonHeaderVO {
 		REQ_TIME = "";
 		RES_TIME = "";
 		MAX_FLAG = "";
+		COL_NAMES = "";
 		
 	}
 
 
+	public String getCOL_NAMES() {
+		return COL_NAMES;
+	}
+
+
+	public void setCOL_NAMES(String cOL_NAMES) {
+		COL_NAMES = cOL_NAMES;
+	}
 	public String getCOUNT() {
 		return COUNT;
 	}
