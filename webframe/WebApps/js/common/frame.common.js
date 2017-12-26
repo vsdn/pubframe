@@ -1,3 +1,4 @@
+var jsonGridArray = [{}];  
 
 var cmnFrame = {
 		getClientType : function() {
@@ -43,5 +44,72 @@ var cmnFrame = {
 				obj.setData($("#" + objFormID).serializeArray()[i].name, $("#" + objFormID).serializeArray()[i].value, idx);
 			}
 			  return obj;
+		},
+		initGrid:function(objGridID,aJsonArray){
+			$("#"+objGridID).jsGrid({
+		        height: "100%",
+		        width: "100%",
+		        filtering: true,
+		        editing: false,
+		        inserting: false,
+		        sorting: true,
+		        paging: false,
+		        autoload: true,
+		        pageSize: 15,
+		        pageButtonCount: 10,
+		        deleteConfirm: "삭제?",
+		        controller: dataObj,
+		        fields: aJsonArray
+		        , rowClick: function(e) {
+		    		//window.hItem = e.item;
+					/*   cmnFrame.setFormDataClear("detForm");
+		        	USR0101M01.setFormData(e.item);
+		        	$("#btnNew").hide();
+		        	$("#btnCancel").show();
+					$("#btnDelete").show();
+					$("#btnSave").show();
+					$("#btnCancel").prop("disabled", false);
+					$("#btnDelete").prop("disabled", false);
+					$("#btnSave").prop("disabled", false);
+					 prcsMode = 0;*/
+		    	}
+		    });
 		}
+
+		, getData:function(items,cols,objGridID) {
+			var arrCols = cols.split('|');
+			var aJsonArray = new Array();
+			
+
+			for(var i = 0 ; i < arrCols.length ; i++)
+				{
+				var aJson = new Object();
+					aJson.name = arrCols[i];
+					aJson.type = "text";
+					aJson.width = 80;
+					aJsonArray.push(aJson);
+				}
+			  
+			
+			var dataObj = {
+			        loadData: function(filter) {
+			        	return $.grep(this.data, function(Item, arrCols) {
+			        		for(i = 0;i<arrCols.length;i++){
+			        			if((!filter[arrCols[i]] || Item[arrCols[i]].indexOf(filter[arrCols[i]]) > -1) == false){
+					        		return false;
+					        	}
+			        		}
+			                return true;
+			            });
+			        }
+
+			    };
+			
+			
+			dataObj.data = items;
+		    window.dataObj = dataObj;
+		    this.initGrid(objGridID,aJsonArray);
+		}
+	
+		
 }

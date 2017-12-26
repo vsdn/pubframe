@@ -68,94 +68,6 @@ var USR0101M01={
 		    	
 		   })
 		},
-		initGrid:function(){
-			$("#divUsrList").jsGrid({
-		        height: "100%",
-		        width: "100%",
-		        filtering: true,
-		        editing: false,
-		        inserting: false,
-		        sorting: true,
-		        paging: false,
-		        autoload: true,
-		        pageSize: 15,
-		        pageButtonCount: 10,
-		        deleteConfirm: "삭제?",
-		        controller: dataObj,
-		        fields: [
-		        	{ name: "USID", type: "text", width: 80 },
-		            { name: "USNO", type: "text", width: 80 },
-		            { name: "USNAME", type: "text", width: 80 },
-		            { name: "LIFYEA", type: "text", width: 100 },			            
-		            { name: "DEPT_CODE", type: "text", width: 80 },
-		            { name: "GRADE", type: "text", width: 50 },
-		            { name: "LOGIN_F", type: "text",width: 60, align:"center", itemTemplate:function(value,item){
-		            	if(value == "Y") {
-		            		return "<span class=\"hIcon icon i-checkmark-circle blue-icon\"></span>"
-		            	}
-		            	else {
-		            		return "<span class=\"hIcon icon i-circle blue-icon\"></span>"
-		            	}
-		            } },
-		            { name: "LAST_LOGIN_DATE", type: "text", width: 110 },
-		            { name: "SYS_FRST_USNO", type: "text", width: 110 },  
-		            { name: "SYS_FRST_DATE", type: "text", width: 110 },
-		            { name: "SYS_UPDT_USNO", type: "text", width: 110 },
-		            { name: "SYS_UPDT_DATE", type: "text", width: 110 },		            
-		            { name: "USE_F", type: "text",width: 60, align:"center" , itemTemplate:function(value,item){
-		            	if(value == "Y") {
-		            		return "<span class=\"hIcon icon i-checkmark-circle blue-icon\"></span>"
-		            	}
-		            	else {
-		            		return "<span class=\"hIcon icon i-circle blue-icon\"></span>"
-		            	}
-		            } },
-		            { name: "RM", type: "text", width: 150 }
-		                ]
-		        , rowClick: function(e) {
-		    		//window.hItem = e.item;
-					   cmnFrame.setFormDataClear("detForm");
-		        	USR0101M01.setFormData(e.item);
-		        	$("#btnNew").hide();
-		        	$("#btnCancel").show();
-					$("#btnDelete").show();
-					$("#btnSave").show();
-					$("#btnCancel").prop("disabled", false);
-					$("#btnDelete").prop("disabled", false);
-					$("#btnSave").prop("disabled", false);
-					 prcsMode = 0;
-		    	}
-		    });
-		}
-
-		, getData:function(items) {
-			var dataObj = {
-			        loadData: function(filter) {
-			        	return $.grep(this.data, function(Item) {
-			                return (!filter.USID || Item.USNO.indexOf(filter.USID) > -1)
-		                    && (!filter.USNO || Item.USNO.indexOf(filter.USNO) > -1)
-		                    && (!filter.USNAME || Item.USNAME.indexOf(filter.USNAME) > -1)
-		                    && (!filter.LIFYEA || Item.LIFYEA.indexOf(filter.LIFYEA) > -1)
-		                    && (!filter.DEPT_CODE || Item.DEPT_CODE.indexOf(filter.DEPT_CODE) > -1)
-		                    && (!filter.GRADE || Item.GRADE.indexOf(filter.GRADE) > -1)
-		                    && (!filter.LOGIN_F || Item.LOGIN_F.indexOf(filter.LOGIN_F) > -1)
-		                    && (!filter.LAST_LOGIN_DATE || Item.LAST_LOGIN_DATE.indexOf(filter.LAST_LOGIN_DATE) > -1)
-		                    && (!filter.SYS_FRST_USNO || Item.SYS_FRST_USNO.indexOf(filter.SYS_FRST_USNO) > -1)
-		                    && (!filter.SYS_FRST_DATE || Item.SYS_FRST_DATE.indexOf(filter.SYS_FRST_DATE) > -1)
-		                    && (!filter.SYS_UPDT_USNO || Item.SYS_UPDT_USNO.indexOf(filter.SYS_UPDT_USNO) > -1)
-		                    && (!filter.SYS_UPDT_DATE || Item.SYS_UPDT_DATE.indexOf(filter.SYS_UPDT_DATE) > -1)
-		                    && (!filter.USE_F || Item.USE_F.indexOf(filter.USE_F) > -1)
-			            });
-			        }
-
-			    };
-			
-			
-			dataObj.data = items;
-		    window.dataObj = dataObj;
-		    this.initGrid();
-		}
-		,
 		srchUsr:function(){
 			var objReqJson = new reqJson();
 			if(!USR0101M01.srchUsrValidationChk()){alert("검색어를 입력하세요."); return;}
@@ -179,8 +91,8 @@ var USR0101M01={
 			objReqJson.setData("SWORD",$("#srchUserInfo").val(),0);
 			objReqJson.setData("STYPE",$("#Srch_F").val() == "ID"? "ID":"USNAME",0);
 			cmnFrame.callService(objReqJson, function(data) {
-
-			USR0101M01.getData(data.DATA);
+			cmnFrame.getData(data.DATA,"DEPT_CODE|GRADE|LIFYEA|LOGIN_F|PASSWORD|RM|SYS_FRST_DATE|SYS_UPDT_DATE|USE_F|USID|USNAME|USNO","divUsrList")
+			//USR0101M01.getData(data.DATA);
 			}, function(retTxt) {
 
 				alert("실패");
