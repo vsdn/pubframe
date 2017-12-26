@@ -18,6 +18,9 @@ public class responseJsonHeaderVO {
 	private String MAX_FLAG;
 	private String COL_NAMES;
 
+	private String CONTROL_TYPE;
+	private String CONTROL_ID;
+	
 	public responseJsonHeaderVO() {
 		COUNT = "";
 		ERROR_FLAG = "";
@@ -30,10 +33,29 @@ public class responseJsonHeaderVO {
 		RES_TIME = "";
 		MAX_FLAG = "";
 		COL_NAMES = "";
+		CONTROL_TYPE = "";
+		CONTROL_ID = "";
 		
 	}
 
+	public String getCONTROL_TYPE() {
+		return CONTROL_TYPE;
+	}
 
+
+	public void setCONTROL_TYPE(String cONTROL_TYPE) {
+		CONTROL_TYPE = cONTROL_TYPE;
+	}
+
+
+	public String getCONTROL_ID() {
+		return CONTROL_ID;
+	}
+
+
+	public void setCONTROL_ID(String cONTROL_ID) {
+		CONTROL_ID = cONTROL_ID;
+	}
 	public String getCOL_NAMES() {
 		return COL_NAMES;
 	}

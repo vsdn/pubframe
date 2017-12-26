@@ -40,7 +40,7 @@ public class cmnUtil {
 
 			try {
 				//set Value By setter
-				Method method = ((Class<?>) objVO).getMethod("set" + fieldName, String.class);
+				Method method = ((Class<?>) objVO.getClass()).getMethod("set" + fieldName, String.class);
 				method.invoke(objVO, value);
 			} catch(Exception e) {
 				cmnLog.Error("cmn.setVarsInvokeError" + "[" + fieldName + "][" + value + "]");

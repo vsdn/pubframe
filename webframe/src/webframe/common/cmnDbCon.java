@@ -140,16 +140,21 @@ public  responseJsonVO SelectUserResult(requestJsonVO reqVO, String szQuery){
 	
 			 arrParams.add((String) map.get("SWORD"));
 	
-			 rsVO.DATA = objDB.executeSelect(con, szQuery, arrParams, new usrVO());
+			 rsVO = objDB.executeSelect(con, szQuery, arrParams, new usrVO(), rsVO);
 		     
 			 if(rsVO.DATA.size() == 0) {
-			     rsVO.HEADER.setCOUNT(String.valueOf(rsVO.DATA.size()));
+			     //rsVO.HEADER.setCOUNT(String.valueOf(rsVO.DATA.size()));
+				 rsVO.HEADER.setCONTROL_ID(reqVO.HEADER.getCONTROL_ID());
+				 rsVO.HEADER.setCONTROL_TYPE(reqVO.HEADER.getCONTROL_TYPE());
 			     rsVO.HEADER.setMSG("조회된 데이터가 없습니다.");
 			     rsVO.HEADER.setMSG_CODE("9999");
 			 } else {
-			     rsVO.HEADER.setCOUNT(String.valueOf(rsVO.DATA.size()));
+			     //rsVO.HEADER.setCOUNT(String.valueOf(rsVO.DATA.size()));
+				 rsVO.HEADER.setCONTROL_ID(reqVO.HEADER.getCONTROL_ID());
+				 rsVO.HEADER.setCONTROL_TYPE(reqVO.HEADER.getCONTROL_TYPE());
 			     rsVO.HEADER.setMSG("정상적으로 조회 되었습니다.");
 			     rsVO.HEADER.setMSG_CODE("1000");
+			     
 			 }
 		}
 		objDB.closeCon(con);

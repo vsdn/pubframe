@@ -105,6 +105,7 @@ public class cmnSvcUtil {
 		Gson gson = new Gson();
 		ret = gson.toJson(objVO);
 
+		cmnLog.Debug("SVC Response : " + ret);
 		return ret;
 	}
 }

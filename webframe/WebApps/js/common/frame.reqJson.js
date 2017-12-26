@@ -14,6 +14,15 @@ function reqJson(obj)
 		this.jsonData = {};
 		this.jsonData.HEADER = {};
 		this.jsonData.DATA = [{}];
+		this.setURL(document.location.href);
+		this.setASYNC("TRUE");
+		this.setPROGRESS_BAR("TRUE");
+		this.setCLIENT_TYPE(cmnFrame.getClientType());
+		this.setCLIENT_META(clientInformation.userAgent);
+		this.setPAGES_CNT("1");
+		this.setROW_CNT("100");
+		this.setMAX_LIMIT("3000");
+		this.setCONTROL_TYPE("NONE");
 	},
 	
 	this.setHeader = function(header){

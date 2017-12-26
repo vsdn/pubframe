@@ -6,120 +6,133 @@ jQuery(document).ready(function(){
 var prcsMode = 0;
 var USR0101M01={  
 		initPage:function(){	
-			 $("#btnNew").show();
-			 $("#btnCancel").hide();
-			 $("#btnDelete").show();
-			 $("#btnSave").show();
-			 $("#btnNew").prop("disabled", false);
-			 $("#btnDelete").prop("disabled", true);
-			 $("#btnSave").prop("disabled", true);
-			 prcsMode = 0;
+			 USR0101M01.initForm("init");
 			 $(".readonly").attr("readonly",true); 
-			 $(".datepicker").datepicker({
-				 	showOn: "both",
-				 	buttonImage:"../../img/btn/iconcalendar.gif",
-				 	buttonImageOnly : "true",
-				 	dateFormat:"yy-mm-dd",
-				 	dayNames : ['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],
-				 	dayNamesMin : ['월','화','수','목','금','토','일'],
-				 	monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
-				 	monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-				 	changeMonth:"true",
-				 	changeYear:"true"
-			 });
-			
+			 cmnFrame.setDatePicker("datepicker");
 		    },
 		
 		defineEvent:function(){
 		   $("#srchUsr").click(function(e){
 			   	USR0101M01.srchUsr();
-			   	USR0101M01.initBasicModeControl();})
+		   })
 		   $("#btnNew").click(function(e){
 			   cmnFrame.setFormDataClear("detForm");
-			   $("#btnNew").hide();
-			   $("#btnCancel").show();
-			   $("#btnDelete").show();
-			   $("#btnSave").show();
-			   $("#btnCancel").prop("disabled", false);
-			   $("#btnDelete").prop("disabled", true);
-			   $("#btnSave").prop("disabled", false);
-			   prcsMode = 1;
+			   USR0101M01.initForm("new");
 		   })
 		   $("#btnCancel").click(function(e){
-			   USR0101M01.initBasicModeControl();
+			   USR0101M01.initForm("cancel");
 		   })
 		   $("#btnDelete").click(function(e){
 			    USR0101M01.deleteExistUsr();
 			    USR0101M01.srchUsr();
-			    USR0101M01.initBasicModeControl();
+			    USR0101M01.initForm("delete");
 		   })
 		   $("#btnSave").click(function(e){
 			   
 		    	if(prcsMode == 1)
 		    		{
 		    			USR0101M01.insertNewUsr();
-		    			USR0101M01.initBasicModeControl();		    			
+		    			USR0101M01.initForm("save");    			
 		    	}else
 		    		{
 		    			USR0101M01.updateExistUsr();
 		    			USR0101M01.srchUsr();
-		    			USR0101M01.initBasicModeControl();	
+		    			USR0101M01.initForm("save");	
 		    		}
 		    	
 		   })
 		},
 		srchUsr:function(){
 			var objReqJson = new reqJson();
+			
 			if(!USR0101M01.srchUsrValidationChk()){alert("검색어를 입력하세요."); return;}
 		
 			objReqJson.createBaseGroup();
 			objReqJson.setSERVICE("USR0101M01");
 			objReqJson.setMETHOD("SelectUser");
 			objReqJson.setMENU_ID("USR0101M01");
-			objReqJson.setASYNC("TRUE");
-			objReqJson.setPROGRESS_BAR("TRUE");
-			 $("#Srch_F").val() == "ID" ? objReqJson.setTYPE("SELECT1"):objReqJson.setTYPE("SELECT2");
-			objReqJson.setURL(document.location.href);
-			objReqJson.setCLIENT_TYPE(cmnFrame.getClientType());
-			objReqJson.setCLIENT_META(clientInformation.userAgent);
-			objReqJson.setCONTROL_TYPE("NONE");
-			objReqJson.setCONTROL_ID("");
-			objReqJson.setPAGES_CNT("1");
-			objReqJson.setROW_CNT("100");
-			objReqJson.setMAX_LIMIT("3000");
+			objReqJson.setCONTROL_TYPE("GRID");
+			objReqJson.setCONTROL_ID("divUsrList");
 
+			 $("#Srch_F").val() == "ID" ? objReqJson.setTYPE("SELECT1"):objReqJson.setTYPE("SELECT2");
 			objReqJson.setData("SWORD",$("#srchUserInfo").val(),0);
 			objReqJson.setData("STYPE",$("#Srch_F").val() == "ID"? "ID":"USNAME",0);
-			cmnFrame.callService(objReqJson, function(data) {
-			cmnFrame.getData(data.DATA,"DEPT_CODE|GRADE|LIFYEA|LOGIN_F|PASSWORD|RM|SYS_FRST_DATE|SYS_UPDT_DATE|USE_F|USID|USNAME|USNO","divUsrList")
-			cmnFrame.setFormDataClear("detForm");
-
-        	$("#btnNew").hide();
-        	$("#btnCancel").show();
-			$("#btnDelete").show();
-			$("#btnSave").show();
-			$("#btnCancel").prop("disabled", false);
-			$("#btnDelete").prop("disabled", false);
-			$("#btnSave").prop("disabled", false);
-			prcsMode = 0;
-
-			}, function(retTxt) {
-
-				alert("실패");
-			});
+			
+			var gridFields = new Array();
+			gridFields = [
+	        	{ name: "USID", type: "text", width: 80 },
+	            { name: "USNO", type: "text", width: 80 },
+	            { name: "USNAME", type: "text", width: 80 },
+	            { name: "LIFYEA", type: "text", width: 100 },			            
+	            { name: "DEPT_CODE", type: "text", width: 80 },
+	            { name: "GRADE", type: "text", width: 50 },
+	            { name: "LOGIN_F", type: "text",width: 60, align:"center", itemTemplate:function(value,item){
+	            	if(value == "Y") {
+	            		return "<span class=\"hIcon icon i-checkmark-circle blue-icon\"></span>"
+	            	}
+	            	else {
+	            		return "<span class=\"hIcon icon i-circle blue-icon\"></span>"
+	            	}
+	            } },
+	            { name: "LAST_LOGIN_DATE", type: "text", width: 110 },
+	            { name: "SYS_FRST_USNO", type: "text", width: 110 },  
+	            { name: "SYS_FRST_DATE", type: "text", width: 110 },
+	            { name: "SYS_UPDT_USNO", type: "text", width: 110 },
+	            { name: "SYS_UPDT_DATE", type: "text", width: 110 },		            
+	            { name: "USE_F", type: "text",width: 60, align:"center" , itemTemplate:function(value,item){
+	            	if(value == "Y") {
+	            		return "<span class=\"hIcon icon i-checkmark-circle blue-icon\"></span>"
+	            	}
+	            	else {
+	            		return "<span class=\"hIcon icon i-circle blue-icon\"></span>"
+	            	}
+	            } },
+	            { name: "RM", type: "text", width: 150 }
+	                ];
+			var gridOptions = {rowClick:function(e) {
+				USR0101M01.initForm("click");
+				cmnFrame.setFormDataClear("detForm");
+				USR0101M01.setFormData(e.item);
+			}};
+			cmnFrame.callService(objReqJson, gridFields, gridOptions, function(data) {alert(data.HEADER["MSG"]); USR0101M01.initForm("srch");}, function(text) {alert("실패");});	
 		},
+		initForm:function(mode) {	
+			switch(mode){
+			case "click" :
+	        	$("#btnNew").hide();
+	        	$("#btnCancel").show();
+				$("#btnDelete").show();
+				$("#btnSave").show();
+				$("#btnCancel").prop("disabled", false);
+				$("#btnDelete").prop("disabled", false);
+				$("#btnSave").prop("disabled", false);
+				prcsMode = 0; 
+				break;
+			case "new" :
+				 $("#btnNew").hide();
+				 $("#btnCancel").show();
+				 $("#btnDelete").show();
+				 $("#btnSave").show();
+				 $("#btnCancel").prop("disabled", false);
+				 $("#btnDelete").prop("disabled", true);
+				 $("#btnSave").prop("disabled", false);
+				 prcsMode = 1;
+				break;				
+				default :
+				 cmnFrame.setFormDataClear("detForm");
+				 $("#btnNew").show();
+				 $("#btnCancel").hide();
+				 $("#btnDelete").show();
+				 $("#btnSave").show();
+				 $("#btnNew").prop("disabled", false);
+				 $("#btnDelete").prop("disabled", true);
+				 $("#btnSave").prop("disabled", true);
+				 prcsMode = 0;
+				 break;
+			}
+	
+		}, 
 
-		initBasicModeControl:function(){
-			   cmnFrame.setFormDataClear("detForm");
-			 $("#btnNew").show();
-			 $("#btnCancel").hide();
-			 $("#btnDelete").show();
-			 $("#btnSave").show();
-			 $("#btnNew").prop("disabled", false);
-			 $("#btnDelete").prop("disabled", true);
-			 $("#btnSave").prop("disabled", true);
-			 prcsMode = 0;
-		},
 		setFormData:function(obj){
 			
 		$("#USID").val(obj.USID);
@@ -152,105 +165,39 @@ var USR0101M01={
     		var objReqJson = new reqJson();
     		
     		objReqJson.createBaseGroup();
-    		objReqJson.setSERVICE("USR0101M01");
-    		objReqJson.setMETHOD("InsertUser");
-    		objReqJson.setMENU_ID("USR0101M01");
-    		objReqJson.setASYNC("TRUE");
-    		objReqJson.setPROGRESS_BAR("TRUE");
-    		objReqJson.setTYPE("INSERT");
-    		objReqJson.setURL(document.location.href);
-    		objReqJson.setCLIENT_TYPE(cmnFrame.getClientType());
-    		objReqJson.setCLIENT_META(clientInformation.userAgent);
-    		objReqJson.setCONTROL_TYPE("NONE");
-    		objReqJson.setCONTROL_ID("");
-    		objReqJson.setPAGES_CNT("1");
-    		objReqJson.setROW_CNT("100");
-    		objReqJson.setMAX_LIMIT("3000");
-    		
-    		
-    		objReqJson = cmnFrame.setJsonData(objReqJson,'detForm',0);
+			objReqJson.setSERVICE("USR0101M01");
+			objReqJson.setMETHOD("InsertUser");
+			objReqJson.setMENU_ID("USR0101M01");
+			objReqJson.setCONTROL_TYPE("NONE");
 
-    		/*objReqJson.setData("USID", $("#USID").val(), 0);
-    		objReqJson.setData("PASSWORD", "mew12345", 0);
-    		objReqJson.setData("USNAME", $("#USNAME").val(), 0);
-    		objReqJson.setData("LIFYEA", $("#LIFYEA").val(), 0);
-    		objReqJson.setData("USE_F","사용" == $("#USE_F").val()? "1":"0", 0);
-    		objReqJson.setData("DEPT_CODE", $("#DEPT_CODE").val(), 0);
-    		objReqJson.setData("GRADE", $("#GRADE").val(), 0);
-    		objReqJson.setData("RM", $("#RM").val(), 0);
-*/
-    		cmnFrame.callService(objReqJson, function(data) {
-    			alert(data.HEADER["MSG"]);
-
-    		}, function(retTxt) {
-    			alert(retTxt);
-    		});	
+    		objReqJson = cmnFrame.getJsonData(objReqJson,'detForm',0);
+    		
+			cmnFrame.callService(objReqJson, "", "", function(data) {alert(data.HEADER["MSG"]);}, function(text) {alert("실패");});	
 		},
     	updateExistUsr:function(){
     		var objReqJson = new reqJson();
     		
     		objReqJson.createBaseGroup();
-    		objReqJson.setSERVICE("USR0101M01");
-    		objReqJson.setMETHOD("UpdateUser");
-    		objReqJson.setMENU_ID("USR0101M01");
-    		objReqJson.setASYNC("TRUE");
-    		objReqJson.setPROGRESS_BAR("TRUE");
-    		objReqJson.setTYPE("UPDATE");
-    		objReqJson.setURL(document.location.href);
-    		objReqJson.setCLIENT_TYPE(cmnFrame.getClientType());
-    		objReqJson.setCLIENT_META(clientInformation.userAgent);
-    		objReqJson.setCONTROL_TYPE("NONE");
-    		objReqJson.setCONTROL_ID("");
-    		objReqJson.setPAGES_CNT("1");
-    		objReqJson.setROW_CNT("100");
-    		objReqJson.setMAX_LIMIT("3000");
+			objReqJson.setSERVICE("USR0101M01");
+			objReqJson.setMETHOD("UpdateUser");
+			objReqJson.setMENU_ID("USR0101M01");
+			objReqJson.setCONTROL_TYPE("NONE");
     		
-    		objReqJson = cmnFrame.setJsonData(objReqJson,'detForm',0);
-/*
-    		objReqJson.setData("USNAME", $("#USNAME").val(), 0);
-    		objReqJson.setData("USID", $("#USID").val(), 0);
-    		objReqJson.setData("USNO", $("#USNO").val(), 0);
-    		objReqJson.setData("LIFYEA", $("#LIFYEA").val(), 0);
-    		objReqJson.setData("USE_F","사용" == $("#USE_F").val()? "1":"0", 0);
-    		objReqJson.setData("DEPT_CODE", $("#DEPT_CODE").val(), 0);
-    		objReqJson.setData("GRADE", $("#GRADE").val(), 0);
-    		objReqJson.setData("RM", $("#RM").val(), 0);
-  */  		
-    		cmnFrame.callService(objReqJson, function(data) {
-    			alert(data.HEADER["MSG"]);
-
-    		}, function(retTxt) {
-    			alert(retTxt);
-    		});			
+    		objReqJson = cmnFrame.getJsonData(objReqJson,'detForm',0);
+		
+    		cmnFrame.callService(objReqJson, "", "", function(data) {alert(data.HEADER["MSG"]);}, function(text) {alert("실패");});		
 		},
 		deleteExistUsr:function(){
-			var objReqJson = new reqJson();
+    		var objReqJson = new reqJson();
     		
     		objReqJson.createBaseGroup();
-    		objReqJson.setSERVICE("USR0101M01");
-    		objReqJson.setMETHOD("DeleteUser");
-    		objReqJson.setMENU_ID("USR0101M01");
-    		objReqJson.setASYNC("TRUE");
-    		objReqJson.setPROGRESS_BAR("TRUE");
-    		objReqJson.setTYPE("DELETE");
-    		objReqJson.setURL(document.location.href);
-    		objReqJson.setCLIENT_TYPE(cmnFrame.getClientType());
-    		objReqJson.setCLIENT_META(clientInformation.userAgent);
-    		objReqJson.setCONTROL_TYPE("NONE");
-    		objReqJson.setCONTROL_ID("");
-    		objReqJson.setPAGES_CNT("1");
-    		objReqJson.setROW_CNT("100");
-    		objReqJson.setMAX_LIMIT("3000");
-    		
-    		objReqJson = cmnFrame.setJsonData(objReqJson,'detForm',0);
-    		/*
-    		objReqJson.setData("USNO", $("#USNO").val(), 0);
-    	*/
-    		cmnFrame.callService(objReqJson, function(data) {
-    			alert(data.HEADER["MSG"]);
+			objReqJson.setSERVICE("USR0101M01");
+			objReqJson.setMETHOD("DeleteUser");
+			objReqJson.setMENU_ID("USR0101M01");
+			objReqJson.setCONTROL_TYPE("NONE");
+			
+    		objReqJson = cmnFrame.getJsonData(objReqJson,'detForm',0);
 
-    		}, function(retTxt) {
-    			alert(retTxt);
-    		});		
+    		cmnFrame.callService(objReqJson, "", "", function(data) {alert(data.HEADER["MSG"]);}, function(text) {alert("실패");});		
 		}
 };
