@@ -92,7 +92,17 @@ var USR0101M01={
 			objReqJson.setData("STYPE",$("#Srch_F").val() == "ID"? "ID":"USNAME",0);
 			cmnFrame.callService(objReqJson, function(data) {
 			cmnFrame.getData(data.DATA,"DEPT_CODE|GRADE|LIFYEA|LOGIN_F|PASSWORD|RM|SYS_FRST_DATE|SYS_UPDT_DATE|USE_F|USID|USNAME|USNO","divUsrList")
-			//USR0101M01.getData(data.DATA);
+			cmnFrame.setFormDataClear("detForm");
+
+        	$("#btnNew").hide();
+        	$("#btnCancel").show();
+			$("#btnDelete").show();
+			$("#btnSave").show();
+			$("#btnCancel").prop("disabled", false);
+			$("#btnDelete").prop("disabled", false);
+			$("#btnSave").prop("disabled", false);
+			prcsMode = 0;
+
 			}, function(retTxt) {
 
 				alert("실패");
