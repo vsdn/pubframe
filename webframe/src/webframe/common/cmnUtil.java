@@ -1,8 +1,11 @@
 package webframe.common;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,5 +52,71 @@ public class cmnUtil {
 		} catch(Exception e) {
 			cmnLog.Error(e);
 		}
+    }
+	public static String getConfig(String key) {
+		String ret = "";
+		
+		try {
+			Properties properties = loadPropByName("");
+			ret = properties.getProperty(key);
+			if(ret == null) {
+				ret = "";
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			cmnLog.Error(e);
+			ret = "";
+		}
+		
+		return ret;
+	}
+	public static String getConfig(String propName, String key) {
+		String ret = "";
+		
+		try {
+			Properties properties = loadPropByName(propName);
+			ret = properties.getProperty(key);
+			if(ret == null) {
+				ret = "";
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			cmnLog.Error(e);
+			ret = "";
+		}
+		
+		return ret;
+	}
+	private static Properties loadPropByName(String propName) throws IOException {
+		String path = "";
+		if(propName == null) {
+			propName = "";
+		}
+		propName = propName.toUpperCase();
+		if("".equals(propName)) {
+			path = "/webframe/config/config.properties";
+		}
+		else if("DEFAULT".equals(propName)) {
+			path = "/webframe/config/config.properties";
+		}
+		else if("MSG".equals(propName)) {
+			path = "/webframe/config/msg.properties";
+		}
+		else if("MESSAGE".equals(propName)) {
+			path = "/webframe/config/msg.properties";
+		}
+		else {
+			path = propName;
+		}
+		
+		Properties properties = loadPropForStatic(path);
+		return properties;
+	}
+    private static Properties loadPropForStatic(String path) throws IOException {
+        Properties properties = new Properties();
+        InputStream inputStream = cmnUtil.class.getClassLoader().getResourceAsStream(path);
+        properties.load(inputStream);
+        inputStream.close();
+        return properties;
     }
 }

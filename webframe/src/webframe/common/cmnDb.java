@@ -6,16 +6,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import webframe.VO.responseJsonVO;
 
 public class cmnDb {
 	public Connection getConnection() {
@@ -24,6 +20,20 @@ public class cmnDb {
 		try {
 			context = new InitialContext();
 			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/SqlDB");
+			con = dataSource.getConnection();
+			
+		} catch (NamingException | SQLException e) {
+			cmnLog.Error(e);
+		}
+		
+		return con;
+	}
+	public Connection getConnection(String contextName) {
+		Context context;
+		Connection con = null;
+		try {
+			context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/" + contextName);
 			con = dataSource.getConnection();
 			
 		} catch (NamingException | SQLException e) {
@@ -45,7 +55,7 @@ public class cmnDb {
 		}
 	}
 	
-	public int executeCmd(Connection con, String sql, ArrayList arrParams ) {
+	public int executeCmd(Connection con, String sql, ArrayList<Object> arrParams ) {
 		PreparedStatement stmt = null;
 		int affCnt = 0;
 		try {
@@ -66,7 +76,7 @@ public class cmnDb {
 
 		return affCnt;
 	}
-	public List<Object> executeSelect(Connection con, String sql, ArrayList arrParams, Object objVO ) {
+	public List<Object> executeSelect(Connection con, String sql, ArrayList<Object> arrParams, Object objVO ) {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -116,7 +126,7 @@ public class cmnDb {
 			cmnLog.Error(e);
 		}
 	}
-	private PreparedStatement setParams(PreparedStatement stmt, ArrayList arrParams) {
+	private PreparedStatement setParams(PreparedStatement stmt, ArrayList<Object> arrParams) {
 		for (int i = 0; i < arrParams.size(); i++) {
 			Object param = arrParams.get(i);
 			String clsName = param.getClass().getName().toUpperCase();
