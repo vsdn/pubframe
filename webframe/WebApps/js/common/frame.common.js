@@ -45,6 +45,14 @@ var cmnFrame = {
 		            this.reset();  
 		         });  
 		},
+		setEnter:function(cont, btn){
+			$("#" + cont).on("keypress", function(e){
+				if (e.keyCode == 13) {
+					$("#" + btn).click();
+			    }
+			});
+			
+		},
 		getJsonData:function(obj,objFormID,idx){
 			var i = 0;
 			for(i = 0; i < $("#" + objFormID ).find("textarea,input[type=text],input[type=password]").length ; i ++ ){
@@ -128,6 +136,43 @@ var cmnFrame = {
 					$(this).val(obj[this.id]);  
 				}
 	         });
+		},
+		initForm:function(frm, mode) {	
+			switch(mode){
+				case "edit" :
+		        	$(".btnNew").hide();
+		        	$(".btnCancel").show();
+					$(".btnDelete").show();
+					$(".btnSave").show();
+					$(".btnCancel").prop("disabled", false);
+					$(".btnDelete").prop("disabled", false);
+					$(".btnSave").prop("disabled", false);
+					prcsMode = 0; 
+					break;
+				case "new" :
+					cmnFrame.setFormDataClear("detForm");
+					$(".btnNew").hide();
+					$(".btnCancel").show();
+					$(".btnDelete").show();
+					$(".btnSave").show();
+					$(".btnCancel").prop("disabled", false);
+					$(".btnDelete").prop("disabled", true);
+					$(".btnSave").prop("disabled", false);
+					prcsMode = 1;
+					break;				
+				default :
+					cmnFrame.setFormDataClear("detForm");
+					$(".btnNew").show();
+					$(".btnCancel").hide();
+					$(".btnDelete").show();
+					$(".btnSave").show();
+					$(".btnNew").prop("disabled", false);
+					$(".btnDelete").prop("disabled", true);
+					$(".btnSave").prop("disabled", true);
+					prcsMode = 0;
+					break;
+			}
+	
 		},
 		setDefaultStyle:function(frm, obj){
 			 $(".readonly").attr("readonly",true); 

@@ -3,7 +3,6 @@ jQuery(document).ready(function(){
 	USR0101M01.defineEvent();
 });
 
-var prcsMode = 0;
 var USR0101M01={  
 		srvID : "USR0101M01",
 		initPage:function(){	
@@ -13,19 +12,19 @@ var USR0101M01={
 		defineEvent:function(){
 		   $("#srchUsr").on("click", function(e){
 			   	USR0101M01.srchUsr();
-		   })
+		   });
 		   $("#btnNew").on("click", function(e){
 			   cmnFrame.setFormDataClear("detForm");
 			   USR0101M01.initForm("new");
-		   })
+		   });
 		   $("#btnCancel").on("click", function(e){
 			   USR0101M01.initForm("cancel");
-		   })
+		   });
 		   $("#btnDelete").on("click", function(e){
 			    USR0101M01.deleteExistUsr();
 			    USR0101M01.srchUsr();
 			    USR0101M01.initForm("delete");
-		   })
+		   });
 		   $("#btnSave").on("click", function(e){
 			   
 		    	if(prcsMode == 1)
@@ -39,44 +38,12 @@ var USR0101M01={
 		    			USR0101M01.initForm("");	
 		    		}
 		    	
-		   })
+		   });
+		   setEnter("srchUserInfo", "srchUsr");
 		},
 		initForm:function(mode) {	
-			switch(mode){
-				case "edit" :
-		        	$("#btnNew").hide();
-		        	$("#btnCancel").show();
-					$("#btnDelete").show();
-					$("#btnSave").show();
-					$("#btnCancel").prop("disabled", false);
-					$("#btnDelete").prop("disabled", false);
-					$("#btnSave").prop("disabled", false);
-					prcsMode = 0; 
-					break;
-				case "new" :
-					cmnFrame.setFormDataClear("detForm");
-					$("#btnNew").hide();
-					$("#btnCancel").show();
-					$("#btnDelete").show();
-					$("#btnSave").show();
-					$("#btnCancel").prop("disabled", false);
-					$("#btnDelete").prop("disabled", true);
-					$("#btnSave").prop("disabled", false);
-					prcsMode = 1;
-					break;				
-				default :
-					cmnFrame.setFormDataClear("detForm");
-					$("#btnNew").show();
-					$("#btnCancel").hide();
-					$("#btnDelete").show();
-					$("#btnSave").show();
-					$("#btnNew").prop("disabled", false);
-					$("#btnDelete").prop("disabled", true);
-					$("#btnSave").prop("disabled", true);
-					prcsMode = 0;
-					break;
-			}
-	
+			cmnFrame.initForm("detForm", mode);
+			$("#detForm_prcsMode").val(mode); 	
 		}, 		
 		srchUsr:function(){
 			var objReqJson = new reqJson();
@@ -102,13 +69,13 @@ var USR0101M01={
 	            { name: "LIFYEA", type: "text", width: 100 },			            
 	            { name: "DEPT_CODE", type: "text", width: 80 },
 	            { name: "GRADE", type: "text", width: 50 },
-	            { name: "LOGIN_F", type: "text",width: 60, align:"center", itemTemplate:gridUtil.tmpFlagStyle },
+	            { name: "LOGIN_F", type: "text", width: 60, align:"center", itemTemplate:gridUtil.tmplFlagStyle },
 	            { name: "LAST_LOGIN_DATE", type: "text", width: 110 },
 	            { name: "SYS_FRST_USNO", type: "text", width: 110 },  
 	            { name: "SYS_FRST_DATE", type: "text", width: 110 },
 	            { name: "SYS_UPDT_USNO", type: "text", width: 110 },
 	            { name: "SYS_UPDT_DATE", type: "text", width: 110 },		            
-	            { name: "USE_F", type: "text",width: 60, align:"center" , itemTemplate:gridUtil.tmpFlagStyle },
+	            { name: "USE_F", type: "text", width: 60, align:"center" , itemTemplate:gridUtil.tmplFlagStyle },
 	            { name: "RM", type: "text", width: 150 }
 	                ];
 			var gridOptions = {rowClick:function(e) {

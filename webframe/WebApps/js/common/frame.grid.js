@@ -1,5 +1,5 @@
 var gridUtil = {
-		tmpFlagStyle:function(value,item){
+		tmplFlagStyle:function(value,item){
         	if(value == "1") {
         		return "<span class=\"hIcon icon i-checkmark-circle blue-icon\"></span>"
         	}
