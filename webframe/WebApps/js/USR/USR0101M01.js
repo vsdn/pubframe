@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
 
 var USR0101M01={  
 		srvID : "USR0101M01",
-		initPage:function(){	
+		initPage:function(){
 			 USR0101M01.initForm("init");
 			 cmnFrame.setDefaultStyle();
 	    },
@@ -27,29 +27,27 @@ var USR0101M01={
 		   });
 		   $("#btnSave").on("click", function(e){
 			   
-		    	if(prcsMode == 1)
-		    		{
-		    			USR0101M01.insertNewUsr();
-		    			USR0101M01.initForm("");    			
-		    	}else
-		    		{
-		    			USR0101M01.updateExistUsr();
-		    			USR0101M01.srchUsr();
-		    			USR0101M01.initForm("");	
-		    		}
+		    	if(prcsMode == 1) {
+	    			USR0101M01.insertNewUsr();
+	    			USR0101M01.initForm("");    			
+		    	} else {
+	    			USR0101M01.updateExistUsr();
+	    			USR0101M01.srchUsr();
+	    			USR0101M01.initForm("");	
+		    	}
 		    	
 		   });
 		   setEnter("srchUserInfo", "srchUsr");
 		},
-		initForm:function(mode) {	
-			cmnFrame.initForm("detForm", mode);
-			$("#detForm_prcsMode").val(mode); 	
-		}, 		
+		initForm:function(mode) {
+			cmnFrame.initCRUDForm("detForm", mode);
+			$("#detForm_prcsMode").val(mode);
+		},
 		srchUsr:function(){
 			var objReqJson = new reqJson();
 			
-			if(!USR0101M01.srchUsrValidationChk()){alert("검색어를 입력하세요."); return;}
-		
+			if(!USR0101M01.srchUsrValidationChk()){cmnFrame.alert("검색어를 입력하세요."); return;}
+			
 			objReqJson.createBaseGroup();
 			objReqJson.setSERVICE(this.srvID);
 			objReqJson.setMETHOD("SelectUser");
@@ -83,7 +81,7 @@ var USR0101M01={
 				cmnFrame.setFormDataClear("detForm");
 				USR0101M01.setFormData(e.item);
 			}};
-			cmnFrame.callService(objReqJson, gridFields, gridOptions, function(data) {alert(data.HEADER["MSG"]); USR0101M01.initForm("srch");}, function(text) {alert("실패");});	
+			cmnFrame.callService(objReqJson, gridFields, gridOptions, function(data) {cmnFrame.alert(data.HEADER["MSG"]); USR0101M01.initForm("srch");}, function(text) {cmnFrame.alert("실패");});	
 		},
 		setFormData:function(obj){
 			cmnFrame.setFormData("detForm", obj);
@@ -108,12 +106,12 @@ var USR0101M01={
 			objReqJson.setMENU_ID("USR0101M01");
 			objReqJson.setCONTROL_TYPE("NONE");
 
-    		objReqJson = cmnFrame.getJsonData(objReqJson,'detForm',0);
+    		objReqJson = cmnFrame.getJsonData(objReqJson, "detForm", 0);
     		
-			cmnFrame.callService(objReqJson, "", "", function(data) {alert(data.HEADER["MSG"]);}, function(text) {alert("실패");});	
+			cmnFrame.callService(objReqJson, "", "", function(data) {cmnFrame.alert(data.HEADER["MSG"]);}, function(text) {cmnFrame.alert("실패");});	
 		},
     	updateExistUsr:function(){
-    		if(cmnFrame.validateForm('detForm') == false) {
+    		if(cmnFrame.validateForm("detForm") == false) {
     			return;
     		}
     		
@@ -125,9 +123,9 @@ var USR0101M01={
 			objReqJson.setMENU_ID("USR0101M01");
 			objReqJson.setCONTROL_TYPE("NONE");
     		
-    		objReqJson = cmnFrame.getJsonData(objReqJson,'detForm',0);
+    		objReqJson = cmnFrame.getJsonData(objReqJson, "detForm", 0);
 		
-    		cmnFrame.callService(objReqJson, "", "", function(data) {alert(data.HEADER["MSG"]);}, function(text) {alert("실패");});		
+    		cmnFrame.callService(objReqJson, "", "", function(data) {cmnFrame.alert(data.HEADER["MSG"]);}, function(text) {cmnFrame.alert("실패");});		
 		},
 		deleteExistUsr:function(){
     		var objReqJson = new reqJson();
@@ -138,8 +136,8 @@ var USR0101M01={
 			objReqJson.setMENU_ID("USR0101M01");
 			objReqJson.setCONTROL_TYPE("NONE");
 			
-    		objReqJson = cmnFrame.getJsonData(objReqJson,'detForm',0);
+    		objReqJson = cmnFrame.getJsonData(objReqJson, "detForm", 0);
 
-    		cmnFrame.callService(objReqJson, "", "", function(data) {alert(data.HEADER["MSG"]);}, function(text) {alert("실패");});		
+    		cmnFrame.callService(objReqJson, "", "", function(data) {cmnFrame.alert(data.HEADER["MSG"]);}, function(text) {cmnFrame.alert("실패");});		
 		}
 };

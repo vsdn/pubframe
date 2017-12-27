@@ -24,12 +24,12 @@ var cmnFrame = {
 		        	
 		            successFunc(data);
 		        	
-		        },   
-		        error:function(e){  
-		            alert(e.responseText);  
+		        },
+		        error:function(e){
+		            alert(e.responseText);
 		            errorFunc(e.responseText);
-		        }  
-			});  
+		        }
+			});
 		},
 		getCookie : function(cookie_id){
 			return $.cookie(cookie_id);
@@ -41,9 +41,9 @@ var cmnFrame = {
 			$.removeCookie(cookie_id);
 		},
 		setFormDataClear:function(objFormID){
-			  $($("#" + objFormID)).each(function() {  
+			  $($("#" + objFormID)).each(function() {
 		            this.reset();  
-		         });  
+		      });  
 		},
 		setEnter:function(cont, btn){
 			$("#" + cont).on("keypress", function(e){
@@ -137,7 +137,7 @@ var cmnFrame = {
 				}
 	         });
 		},
-		initForm:function(frm, mode) {	
+		initCRUDForm:function(frm, mode) {	
 			switch(mode){
 				case "edit" :
 		        	$(".btnNew").hide();
@@ -180,6 +180,8 @@ var cmnFrame = {
 		},
 		validateForm:function(frm) {
 			return true;
+		},
+		alert:function(msg){
+			alert(msg);
 		}
-
 }
