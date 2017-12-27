@@ -1,150 +1,177 @@
 
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>유저관리화면</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../css/common/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/common/icon.css" rel="stylesheet">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<title>유저관리화면</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="../../css/common/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/common/icon.css" rel="stylesheet">
 	<link href="../../css/common/jsgrid.min.css" rel="stylesheet">
 	<link href="../../css/common/jsgrid-theme.min.css" rel="stylesheet">
-	<link href="../../css/common/jquery-ui.min.css" rel="stylesheet">	
-    <link href="../../css/common/common.css" rel="stylesheet">
-    <link href="../../css/USR/USR0101M01.css" rel="stylesheet">
-	  
-    <script src="../../js/common/jquery-1.12.4.min.js"></script>
-    <script src="../../js/common/jquery-ui.min.js"></script>
-   	<script src="../../js/common/bootstrap.bundle.min.js"></script> 
-    <script src="../../js/common/jsgrid.min.js"></script>
-    <script src="../../js/common/frame.common.js"></script>
-    <script src="../../js/common/frame.reqJson.js"></script>
- 	<script src="../../js/common/frame.grid.js"></script>
- 	<script src="../../js/USR/USR0101M01.js"></script>
-  </head>
+	<link href="../../css/common/jquery-ui.min.css" rel="stylesheet">
+	<link href="../../css/common/common.css" rel="stylesheet">
+	<link href="../../css/USR/USR0101M01.css" rel="stylesheet">
+	
+	<script src="../../js/common/jquery-1.12.4.min.js"></script>
+	<script src="../../js/common/jquery-ui.min.js"></script>
+	<script src="../../js/common/bootstrap.bundle.min.js"></script>
+	<script src="../../js/common/jsgrid.min.js"></script>
+	<script src="../../js/common/frame.common.js"></script>
+	<script src="../../js/common/frame.reqJson.js"></script>
+	<script src="../../js/common/frame.grid.js"></script>
+	<script src="../../js/USR/USR0101M01.js"></script>
+</head>
 
-  <body>
-  
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">Fixed navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline mt-2 mt-md-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-<!-- container -->
-<main role="main" class="container">
-  <div class="srchArea only">
-  		<div class="headClass">
-        <div class="titleClass"><span class="hIcon icon i-circle-right2 blue-icon"></span><span class="hText">검색</span></div>
-        <div class="btnClass"><button class="btn btn-primary btn-sm" id="srchUsr">검색버튼</button></div>
-        </div>
-   <div class="srchClass">
-    <div class="srchDet">
-       <form>
-       	<table>
-			<tr>
-				<th>검색어
-				<select class=txt_100 name="Srch_F" id="Srch_F" > <option value="ID">ID</option><option value="이름">이름</option></select>
-				<input class=txt_240 type="text" placeholder="검색어입력" aria-label="SearchUsr" id="srchUserInfo">
-				</th> 
-			</tr>
-		</table>
-    	</form>
-    </div>
-   </div>
- </div>
- 	<div class="listArea only">
- 		<div class="headClass">
- 	  <div class="titleClass"><span class="hIcon icon i-circle-right2 blue-icon"></span><span class="hText">유저리스트</span></div>
-      <div class="btnClass"><button class="btn btn-primary btn-sm">엑셀</button></div>
-      </div>
- 		<div class="listClass">
-    		 <div class="listDiv list600">
-       				<div id="divUsrList"></div>
-   			 </div>
-   		</div>
-    </div>
-    
-    <div class="detArea only">
-	    <div class="headClass">
-	   		<div class="titleClass">
-		   		<span class="hIcon icon i-circle-right2 blue-icon"></span>
-		   		<span class="hText">유저상세</span>
-	   		</div>
-	        <div class="btnClass">
-		        <button  class="btn btn-primary btn-sm" id="btnNew">신규</button>
-		        <button  class="btn btn-primary btn-sm" id="btnCancel">취소</button>
-		        <button  class="btn btn-primary btn-sm" id="btnDelete">삭제</button>
-		        <button  class="btn btn-primary btn-sm" id="btnSave">저장</button>
-	        </div>
-	    </div>
-	        <div class="detDet">
-	           <form id="detForm">
-	        	<div class="detTable" >
-	        		<table>
-	    				<tr>
-	    					<th>사용자명</th> 
-	    					<td> <input type="text" name="" id="USNAME" /> </td>
-	     					<th>사용자ID</th> 
-	     					<td> <input type="text" name="" id="USID" /> </td>
-	       					<th>사용자NO</th> 
-	     					<td> <input type="text" name="" id="USNO" class="readonly"/> </td>
-	       					<th>로그인여부</th> 
-	       					<td> <select name="LOGIN_F" id="LOGIN_F" class="readonly" >  <option value="1">온라인</option><option value="0">오프라인</option></select> </td> 
-	        				<th>최종로그인일자</th> 
-	        				<td> <input style="width:90%;" class="readonly" type="text" name="" id="LAST_LOGIN_DATE" />  </td>
-	    				</tr>
-	   					<tr>
-	     					<th>생년월일</th> 
-	     					<td> <input style="width:90%;" class="datepicker" type="text" name="" id="LIFYEA" />  </td>
-	    					<th>사용여부</th> 
-	    					<td> <select name="USE_F" id="USE_F" > <option value="1">사용</option><option value="0">미사용</option></select></td>
-	     					<th>부서</th> 
-	     					<td> <input type="text" name="" id="DEPT_CODE" />  </td>
-	      					<th>등급</th> 
-	      					<td> <input type="text" name="" id="GRADE" />  </td>
-	      					<th>비고</th> 
-	      					<td> <textarea name="textarea"  name="" id="RM" style="height:40px" ></textarea>  </td>
-	    				</tr>
-	       				<tr>
-	     					<th>생성자</th> 
-	     					<td> <input type="text" name="" id="SYS_FRST_USNO" class="readonly" />  </td>
-	   						<th>생성일</th> 
-	   						<td> <input class="readonly" type="text" name="" id="SYS_FRST_DATE"  /> </td>
-	     					<th>변경자</th> 
-	     					<td> <input type="text" name="" id="SYS_UPDT_USNO" class="readonly"/>   </td>
-	      					<th>변경일</th> 
-	      					<td> <input class="readonly" type="text" name="" id="SYS_UPDT_DATE" />   </td>
-	      					<th>비밀번호</th> 
-	      					<td><input class="" type="text" name="" id="PASSWORD" />   </td>
-	    				</tr>
-	    			</table>
-	        	</div>
-	          </form>
-	        </div>
-    </div>    
-</main><!-- container -->
-  </body>
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#">Fixed navbar</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarCollapse" aria-controls="navbarCollapse"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+			<form class="form-inline mt-2 mt-md-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+	<!-- container -->
+	<main role="main" class="container">
+	<div class="srchArea only">
+		<div class="headClass">
+			<div class="titleClass">
+				<span class="hIcon icon i-circle-right2 blue-icon"></span><span
+					class="hText">검색</span>
+			</div>
+			<div class="btnClass">
+				<button class="btn btn-primary btn-sm" id="srchUsr">검색버튼</button>
+			</div>
+		</div>
+		<div class="srchClass">
+			<div class="srchDet">
+				<form>
+					<table>
+						<tr>
+							<th>검색어 <select class=txt_100 name="Srch_F" id="Srch_F">
+									<option value="ID">ID</option>
+									<option value="이름">이름</option>
+							</select> <input class=txt_240 type="text" placeholder="검색어입력"
+								aria-label="SearchUsr" id="srchUserInfo">
+							</th>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="listArea only">
+		<div class="headClass">
+			<div class="titleClass">
+				<span class="hIcon icon i-circle-right2 blue-icon"></span><span
+					class="hText">유저리스트</span>
+			</div>
+			<div class="btnClass">
+				<button class="btn btn-primary btn-sm">엑셀</button>
+			</div>
+		</div>
+		<div class="listClass">
+			<div class="listDiv list600">
+				<div id="divUsrList"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="detArea only">
+		<div class="headClass">
+			<div class="titleClass">
+				<span class="hIcon icon i-circle-right2 blue-icon"></span> <span
+					class="hText">유저상세</span>
+			</div>
+			<div class="btnClass">
+				<button class="btn btn-primary btn-sm" id="btnNew">신규</button>
+				<button class="btn btn-primary btn-sm" id="btnCancel">취소</button>
+				<button class="btn btn-primary btn-sm" id="btnDelete">삭제</button>
+				<button class="btn btn-primary btn-sm" id="btnSave">저장</button>
+			</div>
+		</div>
+		<div class="detDet">
+			<form id="detForm">
+				<div class="detTable">
+					<table>
+						<tr>
+							<th>사용자명</th>
+							<td><input type="text" name="" id="USNAME" /></td>
+							<th>사용자ID</th>
+							<td><input type="text" name="" id="USID" /></td>
+							<th>사용자NO</th>
+							<td><input type="text" name="" id="USNO" class="readonly" />
+							</td>
+							<th>로그인여부</th>
+							<td><select name="LOGIN_F" id="LOGIN_F" class="readonly">
+									<option value="1">온라인</option>
+									<option value="0">오프라인</option>
+							</select></td>
+							<th>최종로그인일자</th>
+							<td><input style="width: 90%;" class="readonly" type="text"
+								name="" id="LAST_LOGIN_DATE" /></td>
+						</tr>
+						<tr>
+							<th>생년월일</th>
+							<td><input style="width: 90%;" class="datepicker"
+								type="text" name="" id="LIFYEA" /></td>
+							<th>사용여부</th>
+							<td><select name="USE_F" id="USE_F">
+									<option value="1">사용</option>
+									<option value="0">미사용</option>
+							</select></td>
+							<th>부서</th>
+							<td><input type="text" name="" id="DEPT_CODE" /></td>
+							<th>등급</th>
+							<td><input type="text" name="" id="GRADE" /></td>
+							<th>비고</th>
+							<td><textarea name="textarea" name="" id="RM"
+									style="height: 40px"></textarea></td>
+						</tr>
+						<tr>
+							<th>생성자</th>
+							<td><input type="text" name="" id="SYS_FRST_USNO"
+								class="readonly" /></td>
+							<th>생성일</th>
+							<td><input class="readonly" type="text" name=""
+								id="SYS_FRST_DATE" /></td>
+							<th>변경자</th>
+							<td><input type="text" name="" id="SYS_UPDT_USNO"
+								class="readonly" /></td>
+							<th>변경일</th>
+							<td><input class="readonly" type="text" name=""
+								id="SYS_UPDT_DATE" /></td>
+							<th>비밀번호</th>
+							<td><input class="" type="text" name="" id="PASSWORD" /></td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	</main>
+	<!-- container -->
+</body>
 </html>
