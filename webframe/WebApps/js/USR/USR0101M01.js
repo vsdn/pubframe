@@ -102,33 +102,19 @@ var USR0101M01={
 	            { name: "LIFYEA", type: "text", width: 100 },			            
 	            { name: "DEPT_CODE", type: "text", width: 80 },
 	            { name: "GRADE", type: "text", width: 50 },
-	            { name: "LOGIN_F", type: "text",width: 60, align:"center", itemTemplate:function(value,item){
-	            	if(value == "Y") {
-	            		return "<span class=\"hIcon icon i-checkmark-circle blue-icon\"></span>"
-	            	}
-	            	else {
-	            		return "<span class=\"hIcon icon i-circle blue-icon\"></span>"
-	            	}
-	            } },
+	            { name: "LOGIN_F", type: "text",width: 60, align:"center", itemTemplate:gridUtil.tmpFlagStyle },
 	            { name: "LAST_LOGIN_DATE", type: "text", width: 110 },
 	            { name: "SYS_FRST_USNO", type: "text", width: 110 },  
 	            { name: "SYS_FRST_DATE", type: "text", width: 110 },
 	            { name: "SYS_UPDT_USNO", type: "text", width: 110 },
 	            { name: "SYS_UPDT_DATE", type: "text", width: 110 },		            
-	            { name: "USE_F", type: "text",width: 60, align:"center" , itemTemplate:function(value,item){
-	            	if(value == "Y") {
-	            		return "<span class=\"hIcon icon i-checkmark-circle blue-icon\"></span>"
-	            	}
-	            	else {
-	            		return "<span class=\"hIcon icon i-circle blue-icon\"></span>"
-	            	}
-	            } },
+	            { name: "USE_F", type: "text",width: 60, align:"center" , itemTemplate:gridUtil.tmpFlagStyle },
 	            { name: "RM", type: "text", width: 150 }
 	                ];
 			var gridOptions = {rowClick:function(e) {
 				USR0101M01.initForm("edit");
 				cmnFrame.setFormDataClear("detForm");
-				USR0101M01.setFormData("detForm", e.item);
+				USR0101M01.setFormData(e.item);
 			}};
 			cmnFrame.callService(objReqJson, gridFields, gridOptions, function(data) {alert(data.HEADER["MSG"]); USR0101M01.initForm("srch");}, function(text) {alert("실패");});	
 		},

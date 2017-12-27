@@ -113,19 +113,19 @@ var cmnFrame = {
 			 });
 		},
 		setFormData:function(frm, obj){
-			$($("#" + objFormID)).each(function() {
-				if(this.tagName == "select") {
-		            this.val(obj[this.id]);  
-				} else if(this.tagName == "textarea") {
-		            this.val(obj[this.id]);  
-				} else if(this.attr("type") == "text") {
-		            this.val(obj[this.id]);  
-				} else if(this.attr("type") == "radio") {
-		            this.val(obj[this.id]);  
-				} else if(this.attr("type") == "checkbox") {
-		            this.val(obj[this.id]);  
+			$($("#" + frm).find("input,select,textarea")).each(function() {
+				if(this.tagName == "SELECT") {
+		            $(this).val(obj[this.id]);  
+				} else if(this.tagName == "TEXTAREA") {
+					$(this).val(obj[this.id]);  
+				} else if(this.type == "text") {
+					$(this).val(obj[this.id]);  
+				} else if(this.type == "radio") {
+					$(this).val(obj[this.id]);  
+				} else if(this.type == "checkbox") {
+					$(this).val(obj[this.id]);  
 				} else {
-		            this.val(obj[this.id]);  
+					$(this).val(obj[this.id]);  
 				}
 	         });
 		},
