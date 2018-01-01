@@ -1,4 +1,4 @@
-package webframe.common;
+package webframe.DAO.USR;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,9 +18,11 @@ import javax.sql.DataSource;
 
 import webframe.VO.requestJsonVO;
 import webframe.VO.responseJsonVO;
-import webframe.VO.usrVO;
+import webframe.VO.USR.USR0101M01VO;
+import webframe.common.cmnDb;
+import webframe.common.cmnLog;
 
-public class cmnDbCon {
+public class USR0101M01DAO {
 	public  responseJsonVO insertUserResult(requestJsonVO reqVO, String szQuery){
 		
 		responseJsonVO rsVO = new responseJsonVO();
@@ -140,7 +142,7 @@ public  responseJsonVO SelectUserResult(requestJsonVO reqVO, String szQuery){
 	
 			 arrParams.add((String) map.get("SWORD"));
 	
-			 rsVO = objDB.executeSelect(con, szQuery, arrParams, new usrVO(), rsVO);
+			 rsVO = objDB.executeSelect(con, szQuery, arrParams, new USR0101M01VO(), rsVO);
 		     
 			 if(rsVO.DATA.size() == 0) {
 			     //rsVO.HEADER.setCOUNT(String.valueOf(rsVO.DATA.size()));

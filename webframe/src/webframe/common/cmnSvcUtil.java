@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,11 +37,7 @@ public class cmnSvcUtil {
 		objVO.HEADER.setROW_CNT(cmnUtil.getParam(req, "HEADER[ROW_CNT]"));
 		objVO.HEADER.setMAX_LIMIT(cmnUtil.getParam(req, "HEADER[MAX_LIMIT]"));
 		
-		
-		 HashMap<String, String> hDataMap = new HashMap();
-		
-		Enumeration enu = req.getParameterNames();
-		 int i = 0;
+		Enumeration<String> enu = req.getParameterNames();
 		 while (enu.hasMoreElements()) {
 		  String strName= (String) enu.nextElement();
 		  
@@ -55,24 +53,9 @@ public class cmnSvcUtil {
 				Val = cmnUtil.getParam(req, strName);
 
 		        setData(objVO, Integer.parseInt(idx), Key, Val);
-
-				//hDataMap.setString(strName.substring(_index+2,strName.length()-1), Integer.parseInt(strName.substring(_indexFirst+1,_index)), objRequest.getParameterValues(strName)[i], strName.substring(0, _indexFirst));
 			}
 		 
 		 }
-		 
-		 for(i = 0; i < objVO.DATA.size();i++)  {
-			 HashMap map = (HashMap)objVO.DATA.get(i);
-		     Iterator<String> iterator = map.keySet().iterator();
-		     while (iterator.hasNext()) {
-		         String key = (String) iterator.next();
-		     }
-		 }
-	     Iterator<String> iterator = hDataMap.keySet().iterator();
-	     while (iterator.hasNext()) {
-	         String key = (String) iterator.next();
-	     }
-
 		return objVO;
 	}
 	private void setData(requestJsonVO objVO, int Idx, String Key, String Val) {
@@ -91,11 +74,9 @@ public class cmnSvcUtil {
 			
 		}
 		else {
-			HashMap<String, String> map =  (HashMap)objVO.DATA.get(Idx);
-			
+			HashMap<String, String> map =  (HashMap<String, String>)objVO.DATA.get(Idx);
 			map.put(Key, Val);
 			objVO.DATA.set(Idx, map);
-			
 		}
 		
 	}
@@ -107,5 +88,35 @@ public class cmnSvcUtil {
 
 		cmnLog.Debug("SVC Response : " + ret);
 		return ret;
+	}
+	public String getReqJson(requestJsonVO objVO) {
+		String ret = "";
+		
+		Gson gson = new Gson();
+		ret = gson.toJson(objVO);
+
+		cmnLog.Debug("SVC Request : " + ret);
+		return ret;
+	}
+	public responseJsonVO callSvc(requestJsonVO objVO) {
+		responseJsonVO resVO = null;
+		
+		String svcName = objVO.HEADER.getSERVICE();
+		String methodName = objVO.HEADER.getMETHOD();
+		String svcID = svcName.substring(0, 4);
+		
+		
+		try {
+			Object objSvc = cmnUtil.getInstance("webframe.SVC." + svcID + "." + svcName + "SVC");
+			Method method = ((Class<?>) objSvc.getClass()).getMethod(methodName, requestJsonVO.class);
+			resVO = (responseJsonVO) method.invoke(objVO, objVO);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			cmnLog.Error(e);
+			cmnLog.Error("callSVC Error : [" + svcID + "][" + svcName + "][" + methodName + "]");
+			cmnLog.Error("callSVC Error reqVO : [" + getReqJson(objVO) + "]");
+		}
+		
+		return resVO;
+		
 	}
 }

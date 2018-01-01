@@ -1,6 +1,6 @@
-package webframe.VO;
+package webframe.VO.USR;
 
-public class usrVO {
+public class USR0101M01VO {
 	
 	public String getUSID() {
 		return USID;
@@ -146,7 +146,7 @@ public class usrVO {
 	public String SYS_UPDT_DATE;
 	public String RM;
 	
-	public usrVO() {
+	public USR0101M01VO() {
 		USID = "";
 		USNO = "";
 		PASSWORD = "";
